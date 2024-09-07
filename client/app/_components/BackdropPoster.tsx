@@ -12,7 +12,9 @@ function BackdropPoster({ src, title, className }: BackdropPoster) {
       src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${src}`}
       alt={`${title} backdrop poster`}
       fill
+      priority
       className={`-z-10 brightness-35 object-cover ${className}`}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
     />
   );
 }

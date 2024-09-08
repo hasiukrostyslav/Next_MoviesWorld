@@ -24,7 +24,7 @@ function HomeHeroItem({ children, movie, currentMovie, index }: HeroItemProps) {
         />
       </div>
 
-      <div className="z-20 flex items-center justify-between">
+      <div className="z-20 w-full flex items-center justify-between">
         <div className="flex basis-1/2 flex-col">
           <h1 className="mb-4 text-5xl font-bold">{movie.title}</h1>
           <span className="mb-5 ml-2 text-xs">

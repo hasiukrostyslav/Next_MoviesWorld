@@ -1,8 +1,7 @@
 'use client';
 
-import { use } from 'react';
+import { useTheme } from '../_hooks/useTheme';
 import { useMatchTheme } from '../_hooks/useMatchTheme';
-import { ThemeContext } from '../_context/ThemeContext';
 import Icon from '../_components/Icon';
 
 interface ThemeButtonProps {
@@ -12,13 +11,8 @@ interface ThemeButtonProps {
 const absoluteStyles = 'absolute right-1 top-1';
 
 function ThemeButton({ absolute }: ThemeButtonProps) {
-  const context = use(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
   const match = useMatchTheme();
-
-  if (!context)
-    throw new Error('ThemeContext has to be used within ThemeProvider');
-
-  const { theme, toggleTheme } = context;
 
   return (
     <button

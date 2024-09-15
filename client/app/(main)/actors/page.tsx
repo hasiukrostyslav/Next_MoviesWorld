@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import { getActorsPageData } from '@/app/_lib/data-service';
 import ActorCard from '@/app/_components/ActorCard';
 import Pagination from '@/app/_components/Pagination';
+
+export const metadata: Metadata = {
+  title: 'Actors',
+};
 
 async function ActorsPage({
   searchParams,

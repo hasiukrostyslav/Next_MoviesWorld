@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import { getMoviesPageData } from '@/app/_lib/data-service';
 import FilmListShort from '@/app/_components/FilmsListShort';
+
+export const metadata: Metadata = {
+  title: 'Movies',
+};
 
 async function MoviesPage() {
   const categories = await getMoviesPageData();

@@ -1,18 +1,24 @@
+import { Metadata } from 'next';
 import { getCartoonsByCategory } from '@/app/_lib/data-service';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
+import { convertParamToString } from '@/app/_utils/helper';
 
-async function CartoonsByCategoryPage({
-  params,
-  searchParams,
-}: {
+type Props = {
   params: { slug: string[] };
   searchParams: { page: string | undefined };
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const key = params.slug[1];
+  const title = convertParamToString(key) + ' Cartoons';
+
+  return { title };
+}
+
+async function CartoonsByCategoryPage({ params, searchParams }: Props) {
   const [type, key] = params.slug;
   const { page } = searchParams;
-
-  console.log(type, key);
 
   const data = await getCartoonsByCategory(type, key, page);
 
@@ -22,10 +28,9 @@ async function CartoonsByCategoryPage({
     <section className="flex flex-col py-20">
       <FilmListLong
         movies={movies}
-        heading={`${key
-          .split('-')
-          .map((word) => word.at(0)?.toUpperCase() + word.slice(1))
-          .join(' ')} Cartoon ${type === 'movie' ? 'Movies' : 'Serials'}`}
+        heading={`${convertParamToString(key)} Cartoon ${
+          type === 'movie' ? 'Movies' : 'Serials'
+        }`}
       />
       <Pagination
         currentPage={currentPage}

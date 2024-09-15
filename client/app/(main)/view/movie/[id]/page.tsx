@@ -1,10 +1,23 @@
+import { Metadata } from 'next';
 import { getMovieById } from '@/app/_lib/data-service';
 import CastList from '@/app/_components/CastList';
 import FilmListLong from '@/app/_components/FilmListLong';
 import InfoSidebar from '@/app/_components/InfoSidebar';
 import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
 
-async function MoviePage({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = params;
+  const movie = await getMovieById(id);
+  const title = 'Movie: ' + movie.title;
+
+  return { title };
+}
+
+async function MoviePage({ params }: Props) {
   const { id } = params;
   const movie = await getMovieById(id);
 

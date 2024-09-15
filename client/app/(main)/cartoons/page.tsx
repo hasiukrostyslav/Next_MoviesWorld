@@ -1,5 +1,10 @@
+import { Metadata } from 'next';
 import { getCartoonsPageData } from '../../_lib/data-service';
 import FilmListShort from '@/app/_components/FilmsListShort';
+
+export const metadata: Metadata = {
+  title: 'Cartoons',
+};
 
 async function CartoonsPage() {
   const categories = await getCartoonsPageData();
@@ -15,7 +20,7 @@ async function CartoonsPage() {
             path={`cartoons/category/${type}/${pathKey}`}
             key={`${type}-${category}`}
             movies={data}
-            heading={`${category}`}
+            heading={`${category} ${type === 'tv' ? 'Shows' : 'Movies'}`}
             className={i === arr.length - 1 ? 'pb-20' : ''}
           />
         );

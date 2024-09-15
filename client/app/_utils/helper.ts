@@ -123,3 +123,8 @@ export const formatTextLength = (
 ) =>
   text.length < maxLength ? text : text.slice(0, pad).padEnd(pad + 2, '...');
 
+export const convertParamToString = (str: string) =>
+  str
+    .split('-')
+    .map((word) => word.at(0)?.toUpperCase() + word.slice(1))
+    .join(' ');

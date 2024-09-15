@@ -1,7 +1,12 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import AuthFormLayout from '@/app/_components/AuthFormLayout';
 import Button from '@/app/_components/Button';
 import Input from '@/app/_components/Input';
+
+export const metadata: Metadata = {
+  title: 'Sign In',
+};
 
 function LoginPage() {
   return (

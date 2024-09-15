@@ -3,8 +3,21 @@ import CastList from '@/app/_components/CastList';
 import FilmListLong from '@/app/_components/FilmListLong';
 import InfoSidebar from '@/app/_components/InfoSidebar';
 import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
+import { Metadata } from 'next';
 
-async function ShowPage({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = params;
+  const show = await getShowById(id);
+  const title = 'Show: ' + show.title;
+
+  return { title };
+}
+
+async function ShowPage({ params }: Props) {
   const { id } = params;
   const show = await getShowById(id);
 

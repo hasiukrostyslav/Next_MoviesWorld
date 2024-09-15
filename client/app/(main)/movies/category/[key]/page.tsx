@@ -1,7 +1,9 @@
+import { Metadata } from 'next';
 import {
   getMoviesByCategory,
   // getMoviesPageData,
 } from '@/app/_lib/data-service';
+import { convertParamToString } from '@/app/_utils/helper';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
 
@@ -13,13 +15,19 @@ import Pagination from '@/app/_components/Pagination';
 //   }));
 // }
 
-async function MoviesByCategoryPage({
-  params,
-  searchParams,
-}: {
+type Props = {
   params: { key: string };
   searchParams: { page: string | undefined };
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { key } = params;
+  const title = convertParamToString(key) + ' Movies';
+
+  return { title };
+}
+
+async function MoviesByCategoryPage({ params, searchParams }: Props) {
   const { key } = params;
   const { page } = searchParams;
 
@@ -31,7 +39,7 @@ async function MoviesByCategoryPage({
     <section className="flex flex-col py-20">
       <FilmListLong
         movies={movies}
-        heading="Trending Movies"
+        heading={`${convertParamToString(key)} Movies`}
       />
       <Pagination
         currentPage={currentPage}

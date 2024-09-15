@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import { getTrendingShows } from '@/app/_lib/data-service';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
+
+export const metadata: Metadata = {
+  title: 'Trending Shows',
+};
 
 async function MoviesByCategoryPage({
   searchParams,

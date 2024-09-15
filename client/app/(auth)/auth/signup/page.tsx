@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import AuthFormLayout from '@/app/_components/AuthFormLayout';
 import Button from '@/app/_components/Button';
 import Input from '@/app/_components/Input';
+
+export const metadata: Metadata = {
+  title: 'Sign Up',
+};
 
 function SignUpPage() {
   return (

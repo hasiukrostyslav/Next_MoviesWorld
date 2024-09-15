@@ -1,5 +1,10 @@
+import { Metadata } from 'next';
 import { getShowsPageData } from '@/app/_lib/data-service';
 import FilmListShort from '@/app/_components/FilmsListShort';
+
+export const metadata: Metadata = {
+  title: 'Shows',
+};
 
 async function ShowsPage() {
   const categories = await getShowsPageData();

@@ -1,5 +1,5 @@
 import type { CinemaListTypes } from '../_utils/types';
-import ButtonLink from '../_components/ButtonLink';
+import ButtonLink from './ButtonLink';
 import MovieCard from './MovieCard';
 
 interface FilmListShortProps {

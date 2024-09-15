@@ -1,19 +1,8 @@
-import {
-  getMoviesByCategory,
-  // getMoviesPageData,
-} from '@/app/_lib/data-service';
+import { getShowsByCategory } from '@/app/_lib/data-service';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
 
-// export async function generateStaticParams() {
-//   const categories = await getMoviesPageData();
-
-//   return categories.map((category) => ({
-//     key: category.category.replaceAll(' ', '-').toLowerCase(),
-//   }));
-// }
-
-async function MoviesByCategoryPage({
+async function ShowsByCategoryPage({
   params,
   searchParams,
 }: {
@@ -23,7 +12,7 @@ async function MoviesByCategoryPage({
   const { key } = params;
   const { page } = searchParams;
 
-  const data = await getMoviesByCategory(key, page);
+  const data = await getShowsByCategory(key, page);
 
   const { data: movies, page: currentPage, totalPages } = data;
 
@@ -31,7 +20,10 @@ async function MoviesByCategoryPage({
     <section className="flex flex-col py-20">
       <FilmListLong
         movies={movies}
-        heading="Trending Movies"
+        heading={`${key
+          .split('-')
+          .map((word) => word.at(0)?.toUpperCase() + word.slice(1))
+          .join(' ')} Shows`}
       />
       <Pagination
         currentPage={currentPage}
@@ -41,4 +33,4 @@ async function MoviesByCategoryPage({
   );
 }
 
-export default MoviesByCategoryPage;
+export default ShowsByCategoryPage;

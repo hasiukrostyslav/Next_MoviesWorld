@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CollectionPoster, HeroBaseData } from '../_utils/types';
+import type { CollectionPoster, HeroBaseData } from '../_utils/types';
 
 type List = HeroBaseData[] | CollectionPoster[];
 type TimeOut = 3000 | 5000;

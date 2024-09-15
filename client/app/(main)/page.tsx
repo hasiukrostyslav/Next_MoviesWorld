@@ -1,12 +1,11 @@
-import { getHomeData } from '@/app/_lib/data-service';
+import { getHomePageData } from '@/app/_lib/data-service';
 import { isTypeOfCinema, isTypeOfHero } from '../_utils/helper';
 import ActorsList from '@/app/_components/ActorsList';
 import FilmListShort from '@/app/_components/FilmsListShort';
 import HomeHero from '@/app/_components/HomeHero';
-import { ServerError } from '../_error/error';
 
 async function HomePage() {
-  const categories = await getHomeData();
+  const categories = await getHomePageData();
 
   return (
     <section>

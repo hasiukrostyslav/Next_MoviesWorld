@@ -2,11 +2,7 @@ import Link from 'next/link';
 import type { SocialLinks } from '../_utils/types';
 import Icon from './Icon';
 
-interface SocialLinkProps {
-  linkTo: SocialLinks;
-}
-
-function SocialLink({ linkTo }: SocialLinkProps) {
+function SocialLink({ linkTo }: { linkTo: SocialLinks }) {
   return (
     <li>
       <Link

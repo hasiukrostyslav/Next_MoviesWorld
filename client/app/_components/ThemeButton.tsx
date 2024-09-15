@@ -4,13 +4,9 @@ import { useTheme } from '../_hooks/useTheme';
 import { useMatchTheme } from '../_hooks/useMatchTheme';
 import Icon from '../_components/Icon';
 
-interface ThemeButtonProps {
-  absolute?: boolean;
-}
-
 const absoluteStyles = 'absolute right-1 top-1';
 
-function ThemeButton({ absolute }: ThemeButtonProps) {
+function ThemeButton({ absolute }: { absolute?: boolean }) {
   const { theme, toggleTheme } = useTheme();
   const match = useMatchTheme();
 

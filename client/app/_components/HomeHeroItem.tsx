@@ -1,5 +1,5 @@
-import { formatTextLength } from '../_utils/helper';
 import type { HeroBaseData } from '../_utils/types';
+import { formatTextLength } from '../_utils/helper';
 import BackdropPoster from './BackdropPoster';
 import ButtonLink from './ButtonLink';
 
@@ -17,12 +17,10 @@ function HomeHeroItem({ children, movie, currentMovie, index }: HeroItemProps) {
         index === currentMovie ? '' : 'hidden'
       }`}
     >
-      <div className="absolute left-0 top-0 h-screen w-full">
-        <BackdropPoster
-          src={movie.backdropPath}
-          title={movie.title}
-        />
-      </div>
+      <BackdropPoster
+        src={movie.backdropPath}
+        title={movie.title}
+      />
 
       <div className="z-20 w-full flex items-center justify-between">
         <div className="flex basis-1/2 flex-col">

@@ -2,11 +2,7 @@
 
 import { useTheme } from '../_hooks/useTheme';
 
-interface SpinnerProps {
-  fixed?: boolean;
-}
-
-function Spinner({ fixed }: SpinnerProps) {
+function Spinner({ fixed }: { fixed?: boolean }) {
   const { theme } = useTheme();
 
   return (

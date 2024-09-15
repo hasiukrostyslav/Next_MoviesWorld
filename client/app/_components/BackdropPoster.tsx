@@ -8,14 +8,16 @@ interface BackdropPoster {
 
 function BackdropPoster({ src, title, className }: BackdropPoster) {
   return (
-    <Image
-      src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${src}`}
-      alt={`${title} backdrop poster`}
-      fill
-      priority
-      className={`-z-10 brightness-35 object-cover ${className}`}
-      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
-    />
+    <div className="absolute top-0 right-0 h-screen w-full">
+      <Image
+        src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${src}`}
+        alt={`${title} backdrop poster`}
+        fill
+        priority
+        className={`-z-10 brightness-35 object-cover ${className}`}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
+      />
+    </div>
   );
 }
 

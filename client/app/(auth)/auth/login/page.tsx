@@ -32,7 +32,7 @@ function LoginPage() {
         </Button>
       </form>
       <Link
-        href="/home"
+        href="/"
         className="mt-6 self-end rounded-md px-1 py-1 text-xs font-semibold text-blue-500 outline-0 ring-blue-500 transition-all duration-200 hover:underline focus-visible:ring-2"
       >
         Forgot your password?

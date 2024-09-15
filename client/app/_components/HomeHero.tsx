@@ -6,11 +6,7 @@ import HomeHeroItem from './HomeHeroItem';
 import Poster from './Poster';
 import SliderButton from './SliderButton';
 
-interface HeroProps {
-  movies: HeroBaseData[];
-}
-
-function HomeHero({ movies }: HeroProps) {
+function HomeHero({ movies }: { movies: HeroBaseData[] }) {
   const { currentMovie, nextMovie, prevMovie } = useSlider(movies, 3000);
 
   return (

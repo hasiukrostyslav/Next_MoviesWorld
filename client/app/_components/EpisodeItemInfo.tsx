@@ -21,7 +21,9 @@ function EpisodeItemInfo({ episode }: { episode: EpisodeData }) {
         </span>
 
         <NavigationLink
-          // className="text-slate-500"
+          className={
+            !isCurrentEpisode ? 'text-slate-500 hover:text-slate-400' : ''
+          }
           href={`/view/tv/${episode.showId}/season/${episode.seasonNumber}/episode/${episode.number}`}
         >
           {episode.title}

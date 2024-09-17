@@ -58,7 +58,7 @@ function CollectionsHero({ posters }: { posters: CollectionPoster[] }) {
                     : process.env.NEXT_PUBLIC_IMG_URL_SMALL
                 }${movie.img.posterImg}`}
                 alt="Collection poster"
-                className={`rounded-md ${
+                className={`rounded-md transition-all duration-500 hover:opacity-80 ${
                   index === currentMovie ? 'w-56' : 'w-36'
                 }`}
                 width={`${index === currentMovie ? 224 : 144}`}
@@ -83,4 +83,3 @@ function CollectionsHero({ posters }: { posters: CollectionPoster[] }) {
 }
 
 export default CollectionsHero;
-

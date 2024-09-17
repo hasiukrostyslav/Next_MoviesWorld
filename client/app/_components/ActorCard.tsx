@@ -17,23 +17,23 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
 
   return (
     <li className={`relative flex w-44 flex-col ${className}`}>
-      <Image
-        className="mb-3 rounded-md"
-        src={
-          actor.imgPath
-            ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${actor.imgPath}`
-            : `/imgActorAlt.jpg`
-        }
-        width={width}
-        height={height}
-        priority
-        quality={80}
-        alt={`${actor.name} photo`}
-      />
       <Link
         href={`/view/actor/${actor.id}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4  hover:dark:text-slate-400"
+        className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4  "
       >
+        <Image
+          className="mb-3 rounded-md transition-all duration-500 hover:opacity-70"
+          src={
+            actor.imgPath
+              ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${actor.imgPath}`
+              : `/imgActorAlt.jpg`
+          }
+          width={width}
+          height={height}
+          priority
+          quality={80}
+          alt={`${actor.name} photo`}
+        />
         {formatTextLength(actor.name, 18, 16)}
       </Link>
       {cast && (
@@ -46,4 +46,3 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
 }
 
 export default ActorCard;
-

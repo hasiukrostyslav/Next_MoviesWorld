@@ -32,7 +32,10 @@ async function ShowSeasonPage({ params }: Props) {
         <InfoSidebar movie={season} />
       </section>
 
-      <EpisodeListShort episodes={season.episodes} />
+      <EpisodeListShort
+        episodes={season.episodes}
+        backupPoster={season.backupPoster}
+      />
 
       {season.seasons.filter((s) => s.seasonNumber !== season.seasonNumber)
         .length > 0 && (

@@ -3,9 +3,10 @@ import EpisodeItem from './EpisodeItem';
 
 interface EpisodeListLongProps {
   episodes: EpisodeData[];
+  backupPoster: string;
 }
 
-function EpisodeListLong({ episodes }: { episodes: EpisodeData[] }) {
+function EpisodeListLong({ episodes, backupPoster }: EpisodeListLongProps) {
   return (
     <section className="mt-24">
       <h2 className="mb-5 text-3xl">{episodes.length} Episodes</h2>
@@ -14,6 +15,7 @@ function EpisodeListLong({ episodes }: { episodes: EpisodeData[] }) {
           <EpisodeItem
             key={episode.id}
             episode={episode}
+            backupPoster={backupPoster}
           />
         ))}
       </ul>
@@ -22,4 +24,3 @@ function EpisodeListLong({ episodes }: { episodes: EpisodeData[] }) {
 }
 
 export default EpisodeListLong;
-

@@ -189,6 +189,16 @@ const getEpisodes = (data, seasonNum) =>
     rating: +episode.vote_average.toFixed(1),
   }));
 
+const getShowBackupPoster = async (id) => {
+  if (!id) return null;
+
+  const response = await axiosRequest.get(
+    `tv/${id}/images?include_image_language=en`
+  );
+
+  return response.data.backdrops.at(0).file_path;
+};
+
 const getTrailer = async (type, id, season, episode) => {
   if (!id) return null;
 
@@ -233,4 +243,6 @@ module.exports = {
   formatBiography,
   getSeasons,
   getEpisodes,
+  getShowBackupPoster,
 };
+

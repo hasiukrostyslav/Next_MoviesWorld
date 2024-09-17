@@ -1,7 +1,12 @@
 import type { EpisodeBaseData } from '../_utils/types';
 import EpisodeCard from './EpisodeCard';
 
-function EpisodeListShort({ episodes }: { episodes: EpisodeBaseData[] }) {
+interface EpisodeListShortProps {
+  episodes: EpisodeBaseData[];
+  backupPoster: string;
+}
+
+function EpisodeListShort({ episodes, backupPoster }: EpisodeListShortProps) {
   return (
     <div className="flex flex-col pt-20">
       <h2 className="text-3xl font-semibold">Episodes</h2>
@@ -9,6 +14,7 @@ function EpisodeListShort({ episodes }: { episodes: EpisodeBaseData[] }) {
         {episodes.map((episode) => (
           <EpisodeCard
             episode={episode}
+            backupPoster={backupPoster}
             key={episode.id}
           />
         ))}
@@ -18,4 +24,3 @@ function EpisodeListShort({ episodes }: { episodes: EpisodeBaseData[] }) {
 }
 
 export default EpisodeListShort;
-

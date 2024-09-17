@@ -2,14 +2,21 @@ import Image from 'next/image';
 import type { EpisodeData } from '../_utils/types';
 import EpisodeItemInfo from './EpisodeItemInfo';
 
-function EpisodeItem({ episode }: { episode: EpisodeData }) {
+interface EpisodeItemProps {
+  episode: EpisodeData;
+  backupPoster: string;
+}
+
+function EpisodeItem({ episode, backupPoster }: EpisodeItemProps) {
   return (
     <>
       <li className="flex h-44">
         <div className="relative w-max">
           <Image
             className="h-full w-96 rounded-md"
-            src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${episode.posterPath}`}
+            src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${
+              episode.posterPath || backupPoster
+            }`}
             alt="Episode Image"
             width={240}
             height={240}
@@ -23,4 +30,3 @@ function EpisodeItem({ episode }: { episode: EpisodeData }) {
 }
 
 export default EpisodeItem;
-

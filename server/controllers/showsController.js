@@ -8,6 +8,7 @@ const {
   getTrailer,
   getSeasons,
   getEpisodes,
+  getShowBackupPoster,
 } = require('../utils/helpers');
 
 const getShowListsByCategory = async (req, res, next) => {
@@ -94,6 +95,7 @@ const getSeason = async (req, res, next) => {
   const { data: showData } = showResponse;
   const { data: seasonData } = seasonResponse;
 
+  const backupPoster = await getShowBackupPoster(id);
   const cast = await getCast('tv', showData.id, seasonId);
   const seasons = getSeasons(showData, seasonData.id);
   const episodes = getEpisodes(seasonData.episodes, seasonData.season_number);
@@ -113,6 +115,7 @@ const getSeason = async (req, res, next) => {
     numberOfEpisodes: seasonData.episodes.length,
     overview: seasonData.overview,
     videoKey: video?.key || null,
+    backupPoster,
     episodes,
     seasons,
     cast,
@@ -136,6 +139,7 @@ const getEpisode = async (req, res, next) => {
 
   const cast = await getCast('tv', id, seasonId, episodeId);
   const video = await getTrailer('tv', id, seasonId, episodeId);
+  const backupPoster = await getShowBackupPoster(id);
 
   const seasonResponse = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
   const episodes = getEpisodes(seasonResponse.data.episodes, seasonId);
@@ -153,6 +157,7 @@ const getEpisode = async (req, res, next) => {
     numberOfSeasons: showData.number_of_seasons,
     runtime: episodeData.runtime,
     videoKey: video?.key || null,
+    backupPoster,
     cast,
     episodes,
   };
@@ -170,3 +175,4 @@ module.exports = {
   getSeason,
   getEpisode,
 };
+

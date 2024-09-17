@@ -2,7 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { EpisodeBaseData } from '../_utils/types';
 
-function EpisodeCard({ episode }: { episode: EpisodeBaseData }) {
+interface EpisodeCardProps {
+  episode: EpisodeBaseData;
+  backupPoster: string;
+}
+
+function EpisodeCard({ episode, backupPoster }: EpisodeCardProps) {
   const { seasonNumber, title, posterPath, number: episodeNum } = episode;
 
   return (
@@ -13,7 +18,9 @@ function EpisodeCard({ episode }: { episode: EpisodeBaseData }) {
       >
         <Image
           className="rounded-md transition-all duration-500 hover:opacity-70"
-          src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${posterPath}`}
+          src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${
+            posterPath || backupPoster
+          }`}
           alt="Episode Image"
           priority
           quality={80}

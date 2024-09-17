@@ -35,13 +35,14 @@ function EpisodeHero({
     episodeNumber,
     numberOfSeasons,
     seasonNumber,
+    backupPoster,
   } = episode;
 
   return (
     <div className="flex h-hero flex-col">
-      {posterPath && (
+      {(posterPath || backupPoster) && (
         <BackdropPoster
-          src={posterPath}
+          src={posterPath || backupPoster}
           title={title}
         />
       )}
@@ -104,4 +105,3 @@ function EpisodeHero({
 }
 
 export default EpisodeHero;
-

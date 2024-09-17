@@ -24,4 +24,3 @@ export function useSlider(list: List, timeout: TimeOut) {
 
   return { currentMovie, nextMovie, prevMovie };
 }
-

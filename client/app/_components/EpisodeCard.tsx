@@ -21,7 +21,7 @@ function EpisodeCard({ episode }: { episode: EpisodeBaseData }) {
       </span>
       <Link
         href={`${seasonNumber}/episode/${episodeNum}`}
-        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4 hover:dark:text-slate-400"
+        className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4 hover:dark:text-slate-400"
       >
         {title}
       </Link>
@@ -30,5 +30,3 @@ function EpisodeCard({ episode }: { episode: EpisodeBaseData }) {
 }
 
 export default EpisodeCard;
-
-

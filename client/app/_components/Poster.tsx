@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { getImageSize } from '../_utils/helper';
 
 interface PosterProps {
   src: string;
@@ -7,19 +6,17 @@ interface PosterProps {
 }
 
 function Poster({ src, title }: PosterProps) {
-  const { width, height } = getImageSize('medium');
-
   return (
     <Image
       src={src}
       alt={`${title} poster`}
       priority
-      width={width}
-      height={height}
-      className="rounded-lg"
+      width={256}
+      height={384}
+      quality={80}
+      className="rounded-lg object-contain"
     />
   );
 }
 
 export default Poster;
-

@@ -14,7 +14,7 @@ function BackdropPoster({ src, title, className }: BackdropPoster) {
         alt={`${title} backdrop poster`}
         fill
         priority
-        className={`-z-10 brightness-35 object-cover ${className}`}
+        className={`-z-10 brightness-35 object-fil ${className}`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw"
       />
     </div>
@@ -22,4 +22,3 @@ function BackdropPoster({ src, title, className }: BackdropPoster) {
 }
 
 export default BackdropPoster;
-

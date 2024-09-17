@@ -47,7 +47,7 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
           }`}
           className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-800 focus-visible:ring-4 hover:dark:text-slate-400"
         >
-          {formatTextLength(item.title, 18, 21)}
+          {formatTextLength(item.title, 17, 20)}
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
@@ -61,4 +61,3 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
 }
 
 export default MovieCard;
-

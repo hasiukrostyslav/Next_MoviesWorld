@@ -20,7 +20,7 @@ function ActorHero({ actor }: ActorHeroProps) {
   return (
     <div className="my-14">
       <div className="flex h-full gap-10">
-        <div className="basis-1/4">
+        <div className="basis-1/4 h-96 relative">
           <Poster
             src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${imgPath}`}
             title={name}
@@ -59,4 +59,3 @@ function ActorHero({ actor }: ActorHeroProps) {
 }
 
 export default ActorHero;
-

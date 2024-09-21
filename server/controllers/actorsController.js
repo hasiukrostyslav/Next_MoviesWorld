@@ -1,13 +1,16 @@
 const { StatusCodes } = require('http-status-codes');
+const { NotFoundError } = require('../errors');
 const axiosRequest = require('../utils/axiosInstance');
 const {
   getMaxPage,
-  getMoviesData,
-  getShowsData,
-  getAge,
-  formatBiography,
+  getActorAge,
+  formatActorBiography,
 } = require('../utils/helpers');
-const { NotFoundError } = require('../errors');
+const {
+  convertMovieData,
+  convertShowData,
+  convertActorData,
+} = require('../utils/convertData');
 
 const getAllActors = async (req, res, next) => {
   const path = 'trending/person/week';
@@ -24,12 +27,7 @@ const getAllActors = async (req, res, next) => {
     params: { page },
   });
 
-  const data = response.data.results.map((actor) => ({
-    id: actor.id,
-    name: actor.name,
-    imgPath: actor.profile_path,
-    character: null,
-  }));
+  const data = response.data.results.map((actor) => convertActorData(actor));
 
   res.status(StatusCodes.OK).json({
     status: 'success',
@@ -49,12 +47,12 @@ const getActor = async (req, res, next) => {
 
   const { data: actorData } = actorResponse;
   const moviesData = movieResponse.data.cast.map((movie) =>
-    getMoviesData(movie)
+    convertMovieData(movie)
   );
 
-  const age = getAge(actorData.birthday, actorData.deathday);
-  const biography = formatBiography(actorData.biography);
-  const tvData = tvResponse.data.cast.map((movie) => getShowsData(movie));
+  const age = getActorAge(actorData.birthday, actorData.deathday);
+  const biography = formatActorBiography(actorData.biography);
+  const tvData = tvResponse.data.cast.map((movie) => convertShowData(movie));
   const credits = [...moviesData, ...tvData]
     .filter((item) => item.year)
     .sort((a, b) => b.year - a.year)

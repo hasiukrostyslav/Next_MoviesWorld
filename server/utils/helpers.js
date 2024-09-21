@@ -2,6 +2,7 @@ const axiosRequest = require('./axiosInstance');
 const genresTypes = require('../data/genresData.json');
 const { NotFoundError } = require('../errors');
 const { uniquePoster } = require('./constants');
+const { convertMovieData, convertActorData } = require('./convertData');
 
 const convertGenres = (ids) =>
   ids.map(
@@ -10,24 +11,6 @@ const convertGenres = (ids) =>
         (genre) => genre.id === id
       ).name
   );
-
-const getMoviesData = (movie) => ({
-  id: movie.id,
-  type: 'movie',
-  title: movie.title,
-  posterPath: movie.poster_path,
-  year: new Date(movie.release_date).getFullYear(),
-  rating: +movie.vote_average.toFixed(1),
-});
-
-const getShowsData = (show) => ({
-  id: show.id,
-  type: 'tv',
-  title: show.name,
-  posterPath: show.poster_path,
-  year: new Date(show.first_air_date).getFullYear(),
-  rating: +show.vote_average.toFixed(1),
-});
 
 const randomSort = (arr) =>
   arr
@@ -127,14 +110,7 @@ const getCollectionData = async function (isCollection) {
 
   const response = await axiosRequest.get(`/collection/${id}`);
 
-  return response.data.parts.map((movie) => ({
-    id: movie.id,
-    posterPath: movie.poster_path,
-    title: movie.title,
-    year: new Date(movie.release_date).getFullYear(),
-    rating: +movie.vote_average.toFixed(1),
-    type: 'movie',
-  }));
+  return response.data.parts.map((movie) => convertMovieData(movie));
 };
 
 const getCast = async (type, id, season, episode) => {
@@ -148,46 +124,9 @@ const getCast = async (type, id, season, episode) => {
   );
   const cast = response.data.cast
     .filter((el) => el.profile_path && el.known_for_department === 'Acting')
-    .map((actor) => ({
-      id: actor.id,
-      name: actor.name,
-      character: actor.character,
-      imgPath: actor.profile_path,
-    }));
+    .map((actor) => convertActorData(actor, actor.character));
   return cast;
 };
-
-const getSeasons = (data, seasonId) => {
-  const seasons = data.seasons
-    .filter((item) => item.season_number !== 0)
-    .filter((s) => (!seasonId ? s : s.id !== seasonId));
-
-  return seasons.map((season) => ({
-    id: data.id,
-    seasonId: season.id,
-    seasonNumber: season.season_number,
-    type: 'tv',
-    season: true,
-    title: season.name,
-    posterPath: season.poster_path,
-    year: new Date(season.air_date).getFullYear(),
-    rating: season.vote_average,
-  }));
-};
-
-const getEpisodes = (data, seasonNum) =>
-  data.map((episode) => ({
-    id: episode.id,
-    showId: episode.show_id,
-    seasonNumber: +seasonNum,
-    number: episode.episode_number,
-    title: episode.name,
-    releaseDate: episode.air_date,
-    overview: episode.overview,
-    runtime: episode.runtime,
-    posterPath: episode.still_path,
-    rating: +episode.vote_average.toFixed(1),
-  }));
 
 const getShowBackupPoster = async (id) => {
   if (!id) return null;
@@ -215,21 +154,37 @@ const getTrailer = async (type, id, season, episode) => {
   );
 };
 
-const getAge = (birthday, deathday) => {
+const filterMoviesByLanguage = (data) => {
+  const expectedLanguage = ['en', 'es', 'fr'];
+
+  return data.filter((item) => {
+    if (item.media_type === 'person') return item;
+
+    if (
+      expectedLanguage.some((el) => el === item.original_language) ||
+      (item.original_language instanceof Array &&
+        item.original_language.some((el) => expectedLanguage.includes(el)))
+    )
+      return item;
+
+    return null;
+  });
+};
+
+// Actors
+const getActorAge = (birthday, deathday) => {
   const dueDate = deathday ? new Date(deathday) : new Date();
 
   return Math.trunc((dueDate - new Date(birthday)) / (365 * 24 * 3600 * 1000));
 };
 
-const formatBiography = (text) => {
+const formatActorBiography = (text) => {
   const exception = 'Description above from the Wikipedia article';
   return text.match(exception) ? text.split(exception).at(0) : text;
 };
 
 module.exports = {
   convertGenres,
-  getMoviesData,
-  getShowsData,
   randomSort,
   checkCollectionPoster,
   convertCollectionResponse,
@@ -239,10 +194,8 @@ module.exports = {
   getTrailer,
   getCollectionData,
   getTrendingListOfItem,
-  getAge,
-  formatBiography,
-  getSeasons,
-  getEpisodes,
   getShowBackupPoster,
+  filterMoviesByLanguage,
+  getActorAge,
+  formatActorBiography,
 };
-

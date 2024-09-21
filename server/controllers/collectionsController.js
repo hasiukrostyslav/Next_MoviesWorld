@@ -1,13 +1,13 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
+const { NotFoundError } = require('../errors');
 const { collectionsIDs } = require('../utils/constants');
 const {
-  getMoviesData,
   randomSort,
   convertCollectionResponse,
   checkCollectionPoster,
 } = require('../utils/helpers');
-const { NotFoundError } = require('../errors');
+const { convertMovieData } = require('../utils/convertData');
 
 const getCollectionsData = async (ids, key, full) => {
   const requests = ids.flatMap((id) =>
@@ -25,7 +25,7 @@ const getCollectionsData = async (ids, key, full) => {
             ? {
                 id: res.data.id,
                 collection: res.data.name,
-                movies: res.data.parts.map((movie) => getMoviesData(movie)),
+                movies: res.data.parts.map((movie) => convertMovieData(movie)),
                 img: {
                   posterImg: res.data.poster_path,
                   backdropImg: res.data.parts.map(
@@ -33,7 +33,7 @@ const getCollectionsData = async (ids, key, full) => {
                   ),
                 },
               }
-            : getMoviesData(res.data)
+            : convertMovieData(res.data)
         )
       )
     );

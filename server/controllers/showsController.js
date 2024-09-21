@@ -2,14 +2,16 @@ const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { showSearchParams } = require('../utils/constants');
 const {
-  getShowsData,
   getListOfItems,
   getCast,
   getTrailer,
-  getSeasons,
-  getEpisodes,
   getShowBackupPoster,
 } = require('../utils/helpers');
+const {
+  convertShowData,
+  convertSeasonData,
+  convertEpisodeData,
+} = require('../utils/convertData');
 
 const getShowListsByCategory = async (req, res, next) => {
   const request = showSearchParams.map((category) =>
@@ -22,7 +24,7 @@ const getShowListsByCategory = async (req, res, next) => {
 
   const data = response.map((resData, index) => ({
     category: showSearchParams[index].key,
-    data: resData.map((movie) => getShowsData(movie)).slice(0, 10),
+    data: resData.map((movie) => convertShowData(movie)).slice(0, 10),
   }));
 
   res.status(StatusCodes.OK).json({
@@ -39,7 +41,7 @@ const getShowList = async (req, res, next) => {
     showSearchParams
   );
 
-  const data = response.data.results.map((movie) => getShowsData(movie));
+  const data = response.data.results.map((movie) => convertShowData(movie));
 
   res.status(StatusCodes.OK).json({
     status: 'success',
@@ -58,7 +60,7 @@ const getShow = async (req, res, next) => {
 
   const cast = await getCast('tv', data.id);
   const video = await getTrailer('tv', id);
-  const seasons = getSeasons(data);
+  const seasons = convertSeasonData(data);
 
   const show = {
     id: data.id,
@@ -97,8 +99,11 @@ const getSeason = async (req, res, next) => {
 
   const backupPoster = await getShowBackupPoster(id);
   const cast = await getCast('tv', showData.id, seasonId);
-  const seasons = getSeasons(showData, seasonData.id);
-  const episodes = getEpisodes(seasonData.episodes, seasonData.season_number);
+  const seasons = convertSeasonData(showData, seasonData.id);
+  const episodes = convertEpisodeData(
+    seasonData.episodes,
+    seasonData.season_number
+  );
 
   const season = {
     showId: showData.id,
@@ -142,7 +147,7 @@ const getEpisode = async (req, res, next) => {
   const backupPoster = await getShowBackupPoster(id);
 
   const seasonResponse = await axiosRequest.get(`/tv/${id}/season/${seasonId}`);
-  const episodes = getEpisodes(seasonResponse.data.episodes, seasonId);
+  const episodes = convertEpisodeData(seasonResponse.data.episodes, seasonId);
 
   const episode = {
     id: episodeData.id,
@@ -175,4 +180,3 @@ module.exports = {
   getSeason,
   getEpisode,
 };
-

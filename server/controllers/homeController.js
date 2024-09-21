@@ -1,11 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
-const {
-  convertGenres,
-  getMoviesData,
-  getShowsData,
-  getTrendingListOfItem,
-} = require('../utils/helpers');
+const { convertGenres, getTrendingListOfItem } = require('../utils/helpers');
+const { convertMovieData, convertShowData } = require('../utils/convertData');
 
 const convertResponseData = (data, category) => {
   switch (category) {
@@ -33,7 +29,7 @@ const convertResponseData = (data, category) => {
       return data
         .slice(0, 10)
         .map((movie) =>
-          movie.title ? getMoviesData(movie) : getShowsData(movie)
+          movie.title ? convertMovieData(movie) : convertShowData(movie)
         );
     }
   }
@@ -85,7 +81,7 @@ const getTrendingMovies = async (req, res, next) => {
     req
   );
 
-  const data = response.data.results.map((movie) => getMoviesData(movie));
+  const data = response.data.results.map((movie) => convertMovieData(movie));
 
   res.status(StatusCodes.OK).json({
     status: 'success',
@@ -102,7 +98,7 @@ const getTrendingShows = async (req, res, next) => {
     req
   );
 
-  const data = response.data.results.map((show) => getShowsData(show));
+  const data = response.data.results.map((show) => convertShowData(show));
 
   res.status(StatusCodes.OK).json({
     status: 'success',

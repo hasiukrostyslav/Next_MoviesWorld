@@ -2,12 +2,12 @@ const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { movieSearchParams } = require('../utils/constants');
 const {
-  getMoviesData,
   getListOfItems,
   getCast,
   getCollectionData,
   getTrailer,
 } = require('../utils/helpers');
+const { convertMovieData } = require('../utils/convertData');
 
 const getMovieListsByCategory = async (req, res, next) => {
   const request = movieSearchParams.map((category) =>
@@ -20,7 +20,7 @@ const getMovieListsByCategory = async (req, res, next) => {
 
   const data = response.map((resData, index) => ({
     category: movieSearchParams[index].key,
-    data: resData.map((movie) => getMoviesData(movie)).slice(0, 10),
+    data: resData.map((movie) => convertMovieData(movie)).slice(0, 10),
   }));
 
   res.status(StatusCodes.OK).json({
@@ -37,7 +37,7 @@ const getMoviesList = async (req, res, next) => {
     movieSearchParams
   );
 
-  const data = response.data.results.map((movie) => getMoviesData(movie));
+  const data = response.data.results.map((movie) => convertMovieData(movie));
 
   res.status(StatusCodes.OK).json({
     status: 'success',

@@ -1,11 +1,8 @@
 const { StatusCodes } = require('http-status-codes');
 const axiosRequest = require('../utils/axiosInstance');
 const { cartoonSearchParams } = require('../utils/constants');
-const {
-  getMoviesData,
-  getShowsData,
-  getListOfItems,
-} = require('../utils/helpers');
+const { getListOfItems } = require('../utils/helpers');
+const { convertMovieData, convertShowData } = require('../utils/convertData');
 
 const getCartoonListsByCategory = async (req, res, next) => {
   const request = cartoonSearchParams.map((category) =>
@@ -22,8 +19,8 @@ const getCartoonListsByCategory = async (req, res, next) => {
     data: resData
       .map((movie) =>
         cartoonSearchParams[index].path === 'movie'
-          ? getMoviesData(movie)
-          : getShowsData(movie)
+          ? convertMovieData(movie)
+          : convertShowData(movie)
       )
       .slice(0, 10),
   }));
@@ -44,7 +41,7 @@ const getCartoonList = async (req, res, next) => {
   );
 
   const data = response.data.results.map((movie) =>
-    type === 'movie' ? getMoviesData(movie) : getShowsData(movie)
+    type === 'movie' ? convertMovieData(movie) : convertShowData(movie)
   );
 
   res.status(StatusCodes.OK).json({

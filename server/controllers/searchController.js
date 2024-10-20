@@ -1,14 +1,10 @@
 const { StatusCodes } = require('http-status-codes');
 const { NotFoundError } = require('../errors');
 const axiosRequest = require('../utils/axiosInstance');
-const {
-  convertMovieData,
-  convertShowData,
-  convertActorData,
-} = require('../utils/convertData');
+const { convertData } = require('../utils/convertData');
 
 const getSearchedItems = async (req, res, next) => {
-  const { query, type, page } = req.query;
+  const { query, type, searchId, remain } = req.query;
 
   let requestType;
   if (!type) requestType = 'multi';
@@ -19,31 +15,63 @@ const getSearchedItems = async (req, res, next) => {
   const path = `/search/${requestType}`;
 
   const response = await axiosRequest.get(path, {
-    params: { query, type, page },
+    params: { query, type, page: searchId || 1 },
   });
 
-  if (page > response.data.total_pages)
+  if (searchId && searchId > response.data.total_pages)
     throw new NotFoundError(
-      `Invalid page: Pages start at 1 and max at ${response.data.total_pages}.`
+      `Invalid searchId: searchId start at 1 and max at ${response.data.total_pages}.`
     );
-  const data = response.data.results.map((item) => {
-    if (
-      item.media_type === 'movie' ||
-      item.media_type === 'collection' ||
-      requestType === 'movie'
-    )
-      return convertMovieData(item);
-    if (item.media_type === 'tv' || requestType === 'tv')
-      return convertShowData(item);
-    return convertActorData(item);
-  });
 
-  res.status(StatusCodes.OK).json({
-    status: 'success',
-    page: response.data.page,
-    totalPages: response.data.total_pages,
+  const responseData = response.data;
+
+  let data = convertData(responseData.results, requestType)
+    .filter((el) => el.imgPath || el.posterPath)
+    .filter((el) => {
+      if (el.type)
+        return el.title.toLowerCase().includes(query.trim().toLowerCase());
+      return el.name.toLowerCase().includes(query.trim().toLowerCase());
+    })
+    .slice(remain ? -remain : 0);
+  const initialParams = {
+    page: responseData.page,
+    totalPages: responseData.total_pages,
+    totalResults: responseData.total_results,
+    resultPerPage: responseData.results.length,
     results: data.length,
     data,
+    redundantData: [],
+  };
+  for (
+    let i = initialParams.page + 1;
+    initialParams.results < initialParams.resultPerPage &&
+    initialParams.page < initialParams.totalPages;
+    i += 1
+  ) {
+    initialParams.page = i;
+    const newResponse = await axiosRequest.get(path, {
+      params: { query, type, page: i },
+    });
+    const newData = convertData(newResponse.data.results, requestType)
+      .filter((el) => el.imgPath || el.posterPath)
+      .filter((el) => {
+        if (el.type)
+          return el.title.toLowerCase().includes(query.trim().toLowerCase());
+        return el.name.toLowerCase().includes(query.trim().toLowerCase());
+      })
+      .slice(remain ? -remain : 0);
+    data = [...data, ...newData];
+    initialParams.results = data.length;
+    if (data.length > initialParams.resultPerPage) {
+      initialParams.data = data.slice(0, 20);
+      initialParams.redundantData = data.slice(20);
+    } else {
+      initialParams.data = data;
+    }
+  }
+  res.status(StatusCodes.OK).json({
+    status: 'success',
+    data: initialParams,
   });
 };
 

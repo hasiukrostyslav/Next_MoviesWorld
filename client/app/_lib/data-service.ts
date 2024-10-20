@@ -282,15 +282,17 @@ export async function getActorById(id: string | undefined): Promise<Actor> {
 // Search
 export async function getSearchedItems(
   query: string,
-  type: string | undefined,
-  page: string | undefined
+  type: string | null,
+  searchId: number | string | null,
+  remain: string | null
 ): Promise<SearchResponse> {
   try {
     if (!query) notFound();
-    const pageParam = page ? `&page=${page}` : '';
     const typeParam = type ? `&typ=${type}` : '';
+    const searchIdParam = searchId ? `&searchId=${searchId}` : '';
+    const remainParam = remain ? `&remain=${remain}` : '';
 
-    const searchParams = `?query=${query}${pageParam}${typeParam}`;
+    const searchParams = `?query=${query}${typeParam}${searchIdParam}${remainParam}`;
 
     const res = await fetch(`${baseURL}/search${searchParams}`);
     const data = await res.json();

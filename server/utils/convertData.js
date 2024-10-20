@@ -55,10 +55,23 @@ const convertActorData = (actor, character) => ({
   character: character || null,
 });
 
+const convertData = (data, type) =>
+  data.map((item) => {
+    if (
+      item.media_type === 'movie' ||
+      item.media_type === 'collection' ||
+      type === 'movie'
+    )
+      return convertMovieData(item);
+    if (item.media_type === 'tv' || type === 'tv') return convertShowData(item);
+    return convertActorData(item);
+  });
+
 module.exports = {
   convertMovieData,
   convertShowData,
   convertSeasonData,
   convertEpisodeData,
   convertActorData,
+  convertData,
 };

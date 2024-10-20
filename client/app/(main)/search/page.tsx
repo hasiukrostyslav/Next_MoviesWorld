@@ -6,17 +6,18 @@ import Tabs from '@/app/_components/Tabs';
 type Props = {
   searchParams: {
     query: string;
-    type: string | undefined;
-    page: string | undefined;
+    type: string | null;
+    searchId: number | string | null;
+    remain: string | null;
   };
 };
 
 async function SearchPage({ searchParams }: Props) {
-  const { query, type, page } = searchParams;
+  const { query, type, searchId, remain } = searchParams;
 
-  const data = await getSearchedItems(query, type, page);
+  const data = await getSearchedItems(query, type, searchId, remain);
 
-  const { data: searchedData, page: currentPage, totalPages } = data;
+  const { data: searchedData, page: currentPage, totalPages } = data.data;
   return (
     <section className="flex flex-col pt-20">
       <h2 className="text-2xl font-semibold">
@@ -27,10 +28,10 @@ async function SearchPage({ searchParams }: Props) {
       </h2>
       <Tabs />
       <SearchedList searchedItems={searchedData} />
-      <Pagination
+      {/* <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-      />
+      /> */}
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { IoSearch, IoStar } from 'react-icons/io5';
+import { AiOutlineClose } from 'react-icons/ai';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import {
@@ -13,6 +14,7 @@ import {
 } from 'react-icons/fa6';
 
 interface IconProps {
+  className?: string;
   name:
     | 'play'
     | 'favorite'
@@ -27,13 +29,16 @@ interface IconProps {
     | 'x'
     | 'sun'
     | 'moon'
-    | 'star';
+    | 'star'
+    | 'close';
 }
 
-function Icon({ name }: IconProps) {
+function Icon({ name, className }: IconProps) {
   switch (name) {
     case 'play':
       return <FaPlay />;
+    case 'close':
+      return <AiOutlineClose />;
     case 'favorite':
       return <FaHeart />;
     case 'previous':
@@ -41,7 +46,7 @@ function Icon({ name }: IconProps) {
     case 'next':
       return <IoIosArrowForward />;
     case 'search':
-      return <IoSearch />;
+      return <IoSearch className={className} />;
     case 'arrowLeft':
       return <FaArrowLeft />;
     case 'arrowRight':
@@ -67,4 +72,3 @@ function Icon({ name }: IconProps) {
 }
 
 export default Icon;
-

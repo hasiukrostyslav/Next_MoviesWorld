@@ -22,7 +22,7 @@ async function SearchPage({ searchParams }: Props) {
       <h2 className="text-2xl font-semibold">
         Search results:{' '}
         <span className="text-xl font-medium text-slate-700 dark:text-slate-400">
-          "{query}"
+          &quot;{query}&quot;
         </span>
       </h2>
       <Tabs />

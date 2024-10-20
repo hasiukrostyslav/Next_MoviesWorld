@@ -3,8 +3,8 @@ const convertMovieData = (movie) => ({
   type: 'movie',
   title: movie.title,
   posterPath: movie.poster_path,
-  year: new Date(movie.release_date).getFullYear(),
-  rating: +movie.vote_average.toFixed(1),
+  year: new Date(movie?.release_date).getFullYear() || null,
+  rating: +movie.vote_average ? +movie.vote_average.toFixed(1) : 0,
 });
 
 const convertShowData = (show) => ({

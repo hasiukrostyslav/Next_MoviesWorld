@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const { NotFoundError } = require('../errors');
+const { NotFoundError, AppError } = require('../errors');
 const axiosRequest = require('../utils/axiosInstance');
 const {
   convertData,
@@ -9,6 +9,10 @@ const {
 
 const getSearchedItems = async (req, res, next) => {
   const { query, type, searchId, remain } = req.query;
+
+  if (!query || query.length < 3) {
+    throw new AppError('Query string should contain at least 3 character', 500);
+  }
 
   let requestType;
   if (!type) requestType = 'multi';
@@ -35,6 +39,10 @@ const getSearchedItems = async (req, res, next) => {
   );
 
   let data = getUniqueItems(convertedData).slice(remain ? -remain : 0);
+
+  if (!data.length) {
+    throw new NotFoundError(`No data found for '${query}'`);
+  }
 
   const initialParams = {
     page: responseData.page,

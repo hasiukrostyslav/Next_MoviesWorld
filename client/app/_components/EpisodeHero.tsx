@@ -61,7 +61,7 @@ function EpisodeHero({
             </h2>
             <Link
               href={newPathname || ''}
-              className="mb-6 text-2xl font-bold"
+              className="outline-round mb-6 w-fit p-1 text-2xl font-bold"
             >
               {showTitle}
             </Link>

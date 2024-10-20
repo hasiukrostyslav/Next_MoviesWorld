@@ -11,6 +11,7 @@ import type {
   Movie,
   MovieCategoryResponse,
   MoviesPageResponse,
+  SearchResponse,
   Show,
   ShowCategoryResponse,
   ShowEpisode,
@@ -273,6 +274,28 @@ export async function getActorById(id: string | undefined): Promise<Actor> {
     const data = await res.json();
 
     return data.data;
+  } catch (error) {
+    throw new ServerError('Something went wrong. Please try again!');
+  }
+}
+
+// Search
+export async function getSearchedItems(
+  query: string,
+  type: string | undefined,
+  page: string | undefined
+): Promise<SearchResponse> {
+  try {
+    if (!query) notFound();
+    const pageParam = page ? `&page=${page}` : '';
+    const typeParam = type ? `&typ=${type}` : '';
+
+    const searchParams = `?query=${query}${pageParam}${typeParam}`;
+
+    const res = await fetch(`${baseURL}/search${searchParams}`);
+    const data = await res.json();
+
+    return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
   }

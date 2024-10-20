@@ -17,9 +17,7 @@ function Logo({ size, className }: LogoProps) {
   return (
     <Link
       href="/"
-      className={`${
-        anta.className
-      } rounded-md py-1 outline-0 ring-blue-500 focus-visible:ring-4 ${
+      className={`${anta.className} outline-round p-1 ${
         size === 'base' ? 'text-3xl' : 'text-5xl'
       } ${className} ${
         match ? 'text-slate-200' : 'text-slate-500 dark:text-slate-200'
@@ -32,4 +30,3 @@ function Logo({ size, className }: LogoProps) {
 }
 
 export default Logo;
-

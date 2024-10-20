@@ -16,10 +16,10 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
     : '';
 
   return (
-    <li className={`relative flex w-44 flex-col ${className}`}>
+    <li className={`relative flex flex-col ${className || 'w-44'}`}>
       <Link
         href={`/view/actor/${actor.id}`}
-        className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4  "
+        className="outline-round flex w-full flex-col p-2 font-semibold hover:text-slate-400"
       >
         <Image
           className="mb-3 rounded-md transition-all duration-500 hover:opacity-70"
@@ -37,8 +37,8 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
         {formatTextLength(actor.name, 18, 16)}
       </Link>
       {cast && (
-        <span className="ml-1 mt-1 text-xs">
-          {formatTextLength(character, 18, 22)}
+        <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+          {formatTextLength(character, 22, 20)}
         </span>
       )}
     </li>

@@ -1,12 +1,19 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function usePagination(currentPage: number, totalPages: number) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [schema, setSchema] = useState<(number | null)[] | []>([]);
   const [curPage, setCurPage] = useState<number>(1);
+
+  const params = searchParams
+    .toString()
+    .split('&')
+    .filter((param) => !param.includes('page'))
+    .join('&');
 
   const schemaParams = useMemo(
     () => ({
@@ -70,19 +77,24 @@ export function usePagination(currentPage: number, totalPages: number) {
 
   const prevPage = () => {
     setCurPage((c) => c - 1);
-    router.push(`?page=${curPage - 1}`, { scroll: false });
+    router.push(`?${params ? params + '&' : ''}page=${curPage - 1}`, {
+      scroll: false,
+    });
   };
 
   const nextPage = () => {
     setCurPage((c) => c + 1);
-    router.push(`?page=${curPage + 1}`, { scroll: false });
+    router.push(`?${params ? params + '&' : ''}page=${curPage + 1}`, {
+      scroll: false,
+    });
   };
 
   const selectPage = (page: number) => {
     setCurPage(() => page);
-    router.push(`?page=${page}`, { scroll: false });
+    router.push(`?${params ? params + '&' : ''}page=${page}`, {
+      scroll: false,
+    });
   };
 
   return { schema, curPage, setCurPage, prevPage, nextPage, selectPage };
 }
-

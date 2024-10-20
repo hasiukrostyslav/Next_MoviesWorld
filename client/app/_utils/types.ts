@@ -51,6 +51,28 @@ export interface CollectionsPageResponse extends ResponseSkeleton {
   data: CollectionData[];
 }
 
+export interface SearchResponse extends ResponseSkeleton {
+  page: number;
+  totalPages: number;
+  data: (MovieBaseData | ShowBaseData | ActorBaseData)[];
+}
+
+export interface SearchMoviesResponse extends ResponseSkeleton {
+  page: number;
+  totalPages: number;
+  data: MovieBaseData[];
+}
+export interface SearchShowsResponse extends ResponseSkeleton {
+  page: number;
+  totalPages: number;
+  data: ShowBaseData[];
+}
+export interface SearchActorsResponse extends ResponseSkeleton {
+  page: number;
+  totalPages: number;
+  data: ActorBaseData[];
+}
+
 // List types
 export type GeneralListTypes =
   | HeroBaseData[]

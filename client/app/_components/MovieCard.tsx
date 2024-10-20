@@ -16,16 +16,16 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
 
   return (
     <li
-      className={`relative min-w-44 ${frame ? 'text-slate-100' : ''} ${
-        hidden || ''
-      }`}
+      className={`relative box-content min-w-44 ${
+        frame ? 'text-slate-100' : ''
+      } ${hidden || ''}`}
     >
-      <div className={`rounded-md ${className}`}>
+      <div className={`w-full ${className}`}>
         <Link
           href={`/view/${item.type}/${item.id}${
             'season' in item ? `/season/${item.seasonNumber}` : ''
           }`}
-          className="rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4"
+          className="outline-round flex w-full flex-col p-2 font-semibold hover:text-slate-400"
         >
           <div className="relative">
             <Image
@@ -42,16 +42,24 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
               alt={`${item.title} poster`}
             />
             {item.rating > 0 && (
-              <span className="absolute top-0 bg-red-600 px-4 text-slate-100">
+              <span
+                className={`absolute top-0 rounded-br-md px-4 text-slate-100 ${
+                  item.rating >= 8
+                    ? 'bg-green-500'
+                    : item.rating < 8 && item.rating >= 7
+                    ? 'bg-yellow-500'
+                    : 'bg-red-600'
+                }`}
+              >
                 {item.rating.toFixed(1)}
               </span>
             )}
           </div>
-          {formatTextLength(item.title, 17, 20)}
+          <span>{formatTextLength(item.title, 17, 20)}</span>
         </Link>
         <div className="mt-2 flex items-center justify-between">
           <span className="text-sm font-light">{item.year}</span>
-          <button className="rounded-lg p-1 font-semibold outline-0 ring-blue-500 focus-visible:ring-4">
+          <button className="outline-round p-1 font-semibold">
             <Icon name="favorite" />
           </button>
         </div>

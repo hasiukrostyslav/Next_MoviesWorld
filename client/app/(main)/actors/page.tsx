@@ -21,11 +21,12 @@ async function ActorsPage({
   return (
     <section className="flex flex-col pt-20">
       <h2 className="text-3xl font-semibold">Popular Actors</h2>
-      <ul className="mb-8 mt-6 grid grid-cols-5 justify-between gap-y-16 px-4">
+      <ul className="mb-8 mt-6 grid grid-cols-5 justify-items-center gap-y-16">
         {actors.map((actor) => (
           <ActorCard
             actor={actor}
             key={actor.id}
+            className="w-48"
           />
         ))}
       </ul>

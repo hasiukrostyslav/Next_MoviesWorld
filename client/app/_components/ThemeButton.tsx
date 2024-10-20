@@ -12,9 +12,9 @@ function ThemeButton({ absolute }: { absolute?: boolean }) {
 
   return (
     <button
-      className={`rounded-lg p-2 text-xl outline-0 ring-blue-500 focus-visible:ring-4 ${
-        absolute ? absoluteStyles : ''
-      } ${match ? 'text-slate-200' : ''}`}
+      className={`outline-round p-2 text-xl ${absolute ? absoluteStyles : ''} ${
+        match ? 'text-slate-200' : ''
+      }`}
       onClick={() => toggleTheme()}
     >
       {theme === 'light' ? <Icon name="sun" /> : <Icon name="moon" />}
@@ -23,4 +23,3 @@ function ThemeButton({ absolute }: { absolute?: boolean }) {
 }
 
 export default ThemeButton;
-

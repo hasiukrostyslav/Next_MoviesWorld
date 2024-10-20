@@ -14,7 +14,7 @@ function EpisodeCard({ episode, backupPoster }: EpisodeCardProps) {
     <li className="">
       <Link
         href={`${seasonNumber}/episode/${episodeNum}`}
-        className="flex flex-col rounded-lg font-semibold outline-0 ring-blue-500 transition-all duration-500 hover:text-slate-400 focus-visible:ring-4 hover:dark:text-slate-400"
+        className="outline-round flex flex-col p-1 font-semibold hover:text-slate-400 hover:dark:text-slate-400"
       >
         <Image
           className="rounded-md transition-all duration-500 hover:opacity-70"

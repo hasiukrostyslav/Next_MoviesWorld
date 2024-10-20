@@ -10,8 +10,7 @@ interface NavigationLinkProps {
   className?: string;
 }
 
-const baseStyles =
-  'duration-500 rounded-md outline-0 transition-all ring-blue-500 outline-0 focus-visible:ring-4 px-2 py-1 z-10';
+const baseStyles = 'outline-round px-2 py-1 z-10';
 
 function NavigationLink({ href, children, className }: NavigationLinkProps) {
   const match = useMatchTheme();
@@ -40,4 +39,3 @@ function NavigationLink({ href, children, className }: NavigationLinkProps) {
 }
 
 export default NavigationLink;
-

@@ -67,6 +67,20 @@ const convertData = (data, type) =>
     return convertActorData(item);
   });
 
+const filterRedundantData = (array, query) =>
+  array
+    .filter((el) => el.imgPath || el.posterPath)
+    .filter((el) => {
+      if (el.type)
+        return el.title.toLowerCase().includes(query.trim().toLowerCase());
+      return el.name.toLowerCase().includes(query.trim().toLowerCase());
+    });
+
+const getUniqueItems = (array) =>
+  [...new Set(array.map((obj) => obj.id))].map((id) =>
+    array.find((obj) => obj.id === id)
+  );
+
 module.exports = {
   convertMovieData,
   convertShowData,
@@ -74,4 +88,6 @@ module.exports = {
   convertEpisodeData,
   convertActorData,
   convertData,
+  getUniqueItems,
+  filterRedundantData,
 };

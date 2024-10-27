@@ -69,7 +69,8 @@ function SearchedList({ initialData }: { initialData: SearchResponse }) {
             );
         })}
       </ul>
-      {(page < totalPages || results > resultPerPage) && (
+      {(extraLoadSetting.curPage < totalPages ||
+        extraLoadSetting.offSet > 0) && (
         <Button
           size="large"
           color="primary"

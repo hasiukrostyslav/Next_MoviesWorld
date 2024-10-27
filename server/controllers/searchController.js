@@ -40,7 +40,7 @@ const getSearchedItems = async (req, res, next) => {
 
   let data = getUniqueItems(convertedData).slice(remain ? -remain : 0);
 
-  if (!data.length) {
+  if (!data.length && !searchId) {
     throw new NotFoundError(`No data found for '${query}'`);
   }
 

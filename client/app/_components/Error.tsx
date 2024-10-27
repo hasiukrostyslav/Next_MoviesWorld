@@ -5,9 +5,10 @@ interface ErrorProps {
   message: string;
   pageType: 'inner' | 'outer';
   children?: React.ReactNode;
+  className?: string;
 }
 
-function Error({ code, message, pageType, children }: ErrorProps) {
+function Error({ code, message, pageType, children, className }: ErrorProps) {
   let imgCode = 404;
 
   if (code >= 500) imgCode = 500;
@@ -19,7 +20,7 @@ function Error({ code, message, pageType, children }: ErrorProps) {
     <section
       className={`flex flex-col items-center justify-center gap-12 ${
         pageType === 'inner' ? 'h-hero' : ''
-      }`}
+      } ${className}`}
     >
       <Image
         width={size}
@@ -39,4 +40,3 @@ function Error({ code, message, pageType, children }: ErrorProps) {
 }
 
 export default Error;
-

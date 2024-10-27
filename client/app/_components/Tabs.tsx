@@ -5,8 +5,7 @@ import Tab from './Tab';
 
 function Tabs() {
   const {
-    queryString,
-    params: { type },
+    params: { query, type },
     leftPosition,
   } = useSearchTabs();
 
@@ -17,28 +16,28 @@ function Tabs() {
       <Tab
         tabType=""
         searchParamType={type || ''}
-        href={`?${queryString}`}
+        href={`?query=${query}`}
       >
         All
       </Tab>
       <Tab
         tabType="movies"
         searchParamType={type}
-        href={`?${queryString}&type=movies`}
+        href={`?query=${query}&type=movies`}
       >
         Movies
       </Tab>
       <Tab
         tabType="shows"
         searchParamType={type}
-        href={`?${queryString}&type=shows`}
+        href={`?query=${query}&type=shows`}
       >
         Shows
       </Tab>
       <Tab
         tabType="actors"
         searchParamType={type}
-        href={`?${queryString}&type=actors`}
+        href={`?query=${query}&type=actors`}
       >
         Actors
       </Tab>

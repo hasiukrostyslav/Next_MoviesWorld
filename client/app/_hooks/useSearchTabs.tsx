@@ -10,16 +10,7 @@ export function useSearchTabs() {
   const params = {
     query: searchParams.get('query') || '',
     type: searchParams.get('type') || '',
-    searchId: searchParams.get('searchId') || '',
-    remain: searchParams.get('remain') || '',
   };
-
-  const queryString = `query=${params.query}`;
-  const searchString = searchParams
-    .toString()
-    .split('&')
-    .filter((param) => param.includes('query') || param.includes('type'))
-    .join('&');
 
   useEffect(() => {
     if (!params.type) setLeftPosition('before:left-0');
@@ -28,5 +19,5 @@ export function useSearchTabs() {
     if (params.type === 'actors') setLeftPosition('before:left-3/4');
   }, [params.type]);
 
-  return { queryString, searchString, params, leftPosition };
+  return { params, leftPosition };
 }

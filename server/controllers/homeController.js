@@ -11,8 +11,8 @@ const convertResponseData = (data, category) => {
         type: movie.title ? 'movie' : 'tv',
         title: movie.title || movie.name,
         overview: movie.overview,
-        backdropPath: movie.backdrop_path,
-        posterPath: movie.poster_path,
+        backdropImg: movie.backdrop_path,
+        posterImg: movie.poster_path,
         genres: convertGenres(movie.genre_ids),
       }));
     }
@@ -21,7 +21,7 @@ const convertResponseData = (data, category) => {
       return data.slice(0, 10).map((person) => ({
         id: person.id,
         name: person.name,
-        imgPath: person.profile_path,
+        posterImg: person.profile_path,
       }));
     }
 

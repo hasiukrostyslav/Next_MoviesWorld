@@ -70,7 +70,7 @@ const getActor = async (req, res, next) => {
     age,
     deathday: actorData.deathday,
     birthplace: actorData.place_of_birth,
-    imgPath: actorData.profile_path,
+    posterImg: actorData.profile_path,
     biography,
     credits,
   };

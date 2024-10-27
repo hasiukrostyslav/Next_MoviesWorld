@@ -2,7 +2,7 @@ const convertMovieData = (movie) => ({
   id: movie.id,
   type: 'movie',
   title: movie.title,
-  posterPath: movie.poster_path,
+  posterImg: movie.poster_path,
   year: new Date(movie?.release_date).getFullYear() || null,
   rating: +movie.vote_average ? +movie.vote_average.toFixed(1) : 0,
 });
@@ -11,7 +11,7 @@ const convertShowData = (show) => ({
   id: show.id,
   type: 'tv',
   title: show.name,
-  posterPath: show.poster_path,
+  posterImg: show.poster_path,
   year: new Date(show.first_air_date).getFullYear(),
   rating: +show.vote_average.toFixed(1),
 });
@@ -28,7 +28,7 @@ const convertSeasonData = (data, seasonId) => {
     type: 'tv',
     season: true,
     title: season.name,
-    posterPath: season.poster_path,
+    posterImg: season.poster_path,
     year: new Date(season.air_date).getFullYear(),
     rating: season.vote_average,
   }));
@@ -44,14 +44,14 @@ const convertEpisodeData = (data, seasonNum) =>
     releaseDate: episode.air_date,
     overview: episode.overview,
     runtime: episode.runtime,
-    posterPath: episode.still_path,
+    posterImg: episode.still_path,
     rating: +episode.vote_average.toFixed(1),
   }));
 
 const convertActorData = (actor, character) => ({
   id: actor.id,
   name: actor.name,
-  imgPath: actor.profile_path,
+  posterImg: actor.profile_path,
   character: character || null,
 });
 
@@ -69,7 +69,7 @@ const convertData = (data, type) =>
 
 const filterRedundantData = (array, query) =>
   array
-    .filter((el) => el.imgPath || el.posterPath)
+    .filter((el) => el.posterImg)
     .filter((el) => {
       if (el.type)
         return el.title.toLowerCase().includes(query.trim().toLowerCase());

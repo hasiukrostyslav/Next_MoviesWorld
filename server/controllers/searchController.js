@@ -5,6 +5,7 @@ const {
   convertData,
   getUniqueItems,
   filterRedundantData,
+  filterLanguageData,
 } = require('../utils/convertData');
 
 const getSearchedItems = async (req, res, next) => {
@@ -33,16 +34,10 @@ const getSearchedItems = async (req, res, next) => {
 
   const responseData = response.data;
 
-  const newData = responseData.results.filter(
-    (el) =>
-      !el.original_language ||
-      el.original_language === 'en' ||
-      el.original_language === 'fr' ||
-      el.original_language === 'es'
-  );
+  const filteredResponseData = filterLanguageData(responseData.results);
 
   const convertedData = filterRedundantData(
-    convertData(newData, requestType),
+    convertData(filteredResponseData, requestType),
     query
   );
 
@@ -68,12 +63,17 @@ const getSearchedItems = async (req, res, next) => {
     i += 1
   ) {
     initialParams.page = i;
+
     const newResponse = await axiosRequest.get(path, {
       params: { query, type, page: i },
     });
 
+    const filteredNewResponseData = filterLanguageData(
+      newResponse.data.results
+    );
+
     const extraData = filterRedundantData(
-      convertData(newResponse.data.results, requestType),
+      convertData(filteredNewResponseData, requestType),
       query
     );
 
@@ -83,7 +83,6 @@ const getSearchedItems = async (req, res, next) => {
     ]);
 
     initialParams.results = data.length;
-
     if (data.length > initialParams.resultPerPage) {
       initialParams.data = data.slice(0, 20);
     } else {

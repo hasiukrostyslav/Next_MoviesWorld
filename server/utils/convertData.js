@@ -81,6 +81,15 @@ const filterRedundantData = (array, query) =>
       return el.name.toLowerCase().includes(query.trim().toLowerCase());
     });
 
+const filterLanguageData = (data) =>
+  data.filter(
+    (el) =>
+      !el.original_language ||
+      el.original_language === 'en' ||
+      el.original_language === 'fr' ||
+      el.original_language === 'es'
+  );
+
 const getUniqueItems = (array) =>
   [...new Set(array.map((obj) => obj.id))].map((id) =>
     array.find((obj) => obj.id === id)
@@ -95,4 +104,5 @@ module.exports = {
   convertData,
   getUniqueItems,
   filterRedundantData,
+  filterLanguageData,
 };

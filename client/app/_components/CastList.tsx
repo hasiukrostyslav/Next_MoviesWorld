@@ -13,7 +13,7 @@ function CastList({ cast }: { cast: ActorBaseData[] }) {
     <div className="flex basis-10/12 flex-col">
       <h2 className="mb-5 text-3xl">Cast</h2>
       <ul
-        className={`flex flex-wrap gap-3 ${
+        className={`flex flex-wrap gap-5 ${
           totalPages > 1 && remainder > itemsPerPage / 2 ? 'h-[43rem]' : ''
         }`}
       >

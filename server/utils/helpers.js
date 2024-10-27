@@ -2,7 +2,11 @@ const axiosRequest = require('./axiosInstance');
 const genresTypes = require('../data/genresData.json');
 const { NotFoundError } = require('../errors');
 const { uniquePoster } = require('./constants');
-const { convertMovieData, convertActorData } = require('./convertData');
+const {
+  convertMovieData,
+  convertActorData,
+  getUniqueItems,
+} = require('./convertData');
 
 const convertGenres = (ids) =>
   ids.map(
@@ -122,9 +126,11 @@ const getCast = async (type, id, season, episode) => {
   const response = await axiosRequest.get(
     `/${type}/${id}${seasonId}${episodeId}/credits`
   );
-  const cast = response.data.cast
-    .filter((el) => el.profile_path && el.known_for_department === 'Acting')
-    .map((actor) => convertActorData(actor, actor.character));
+  const cast = getUniqueItems(
+    response.data.cast
+      .filter((el) => el.profile_path && el.known_for_department === 'Acting')
+      .map((actor) => convertActorData(actor, actor.character))
+  );
   return cast;
 };
 

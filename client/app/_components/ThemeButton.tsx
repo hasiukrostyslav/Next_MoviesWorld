@@ -12,9 +12,9 @@ function ThemeButton({ absolute }: { absolute?: boolean }) {
 
   return (
     <button
-      className={`outline-round p-2 text-xl ${absolute ? absoluteStyles : ''} ${
-        match ? 'text-slate-200' : ''
-      }`}
+      className={`outline-round z-20 p-2 text-xl ${
+        absolute ? absoluteStyles : ''
+      } ${match ? 'text-slate-200' : ''}`}
       onClick={() => toggleTheme()}
     >
       {theme === 'light' ? <Icon name="sun" /> : <Icon name="moon" />}

@@ -33,8 +33,16 @@ const getSearchedItems = async (req, res, next) => {
 
   const responseData = response.data;
 
+  const newData = responseData.results.filter(
+    (el) =>
+      !el.original_language ||
+      el.original_language === 'en' ||
+      el.original_language === 'fr' ||
+      el.original_language === 'es'
+  );
+
   const convertedData = filterRedundantData(
-    convertData(responseData.results, requestType),
+    convertData(newData, requestType),
     query
   );
 

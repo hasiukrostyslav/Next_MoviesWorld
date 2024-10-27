@@ -37,7 +37,7 @@ function Button({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`flex items-center gap-2 rounded-lg font-semibold outline-0 transition-all duration-500 focus-visible:ring-4 ${buttonColors[color]} ${buttonSize[size]} ${className}`}
+      className={`flex items-center gap-2 rounded-lg border-2 font-semibold outline-0 transition-all duration-500 focus-visible:ring-4 disabled:border-slate-400 disabled:bg-slate-400 disabled:hover:bg-slate-400 ${buttonColors[color]} ${buttonSize[size]} ${className}`}
     >
       {children}
     </button>
@@ -45,4 +45,3 @@ function Button({
 }
 
 export default Button;
-

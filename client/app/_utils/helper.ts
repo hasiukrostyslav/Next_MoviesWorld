@@ -33,7 +33,7 @@ export const createMoviesInfoList = function (
 ) {
   // prettier-ignore
   const exception = [
-    'id', 'title', 'overview', 'backdropPath', 'posterPath', 'cast', 'videoKey', 'collection', 'seasons', 'episodes', 'seasonTitle', 'showId', 'seasonId', 'showTitle', 'backupPoster',
+    'id', 'title', 'overview', 'backdropImg', 'posterImg', 'cast', 'videoKey', 'collection', 'seasons', 'episodes', 'seasonTitle', 'showId', 'seasonId', 'showTitle', 'backupPoster',
   ];
 
   const keys = Object.keys(item) as Array<keyof typeof item>;

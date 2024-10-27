@@ -71,6 +71,11 @@ const filterRedundantData = (array, query) =>
   array
     .filter((el) => el.posterImg)
     .filter((el) => {
+      if (!el.type) return el;
+      if (el.year > new Date().getFullYear()) return el;
+      return el.rating > 3;
+    })
+    .filter((el) => {
       if (el.type)
         return el.title.toLowerCase().includes(query.trim().toLowerCase());
       return el.name.toLowerCase().includes(query.trim().toLowerCase());

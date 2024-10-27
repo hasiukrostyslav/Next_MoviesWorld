@@ -2,7 +2,7 @@ import ButtonLink from './ButtonLink';
 
 function AuthMenu() {
   return (
-    <div className="flex gap-5">
+    <div className="z-20 flex gap-5">
       <ButtonLink
         size="small"
         color="outline"
@@ -22,4 +22,3 @@ function AuthMenu() {
 }
 
 export default AuthMenu;
-

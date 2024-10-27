@@ -12,7 +12,7 @@ function CollectionsHero({ posters }: { posters: CollectionPoster[] }) {
 
   const sortItem = (index: number, collection: CollectionPoster[]) => {
     let style = 'hidden';
-    if (index === currentMovie) style = 'translate-y-20 order-1 z-50';
+    if (index === currentMovie) style = 'translate-y-20 order-1 z-20';
     if (currentMovie !== collection.length - 1 && index === currentMovie + 1)
       style = 'order-2 -translate-y-2 -translate-x-12';
     if (currentMovie === collection.length - 1 && index === 0)
@@ -40,7 +40,7 @@ function CollectionsHero({ posters }: { posters: CollectionPoster[] }) {
         {posters.map((movie, index, collection) => (
           <li
             key={movie.key}
-            className={`z-40 flex cursor-pointer ${sortItem(
+            className={`z-10 flex cursor-pointer ${sortItem(
               index,
               collection
             )}`}

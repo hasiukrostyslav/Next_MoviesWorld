@@ -4,7 +4,7 @@ import TopBar from './TopBar';
 
 function Navbar() {
   return (
-    <nav className="relative z-30 mb-4 flex items-center justify-between">
+    <nav className="relative mb-4 flex items-center justify-between">
       <div className="flex items-center justify-between gap-7 3xl:gap-10">
         <Logo size="base" />
         <ul className="flex items-center gap-3 3xl:gap-6">
@@ -22,4 +22,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

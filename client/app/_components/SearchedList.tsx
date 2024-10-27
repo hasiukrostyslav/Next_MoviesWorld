@@ -50,7 +50,7 @@ function SearchedList({ initialData }: { initialData: SearchResponse }) {
 
   return (
     <>
-      <ul className="mb-8 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
+      <ul className="mb-32 mt-6 grid grid-cols-5 justify-items-center gap-y-16 px-4">
         {items.map((item) => {
           if ('type' in item)
             return (
@@ -74,7 +74,7 @@ function SearchedList({ initialData }: { initialData: SearchResponse }) {
         <Button
           size="large"
           color="primary"
-          className="my-16 self-center"
+          className="self-center"
           onClick={() => loadMoreData()}
         >
           Get more results

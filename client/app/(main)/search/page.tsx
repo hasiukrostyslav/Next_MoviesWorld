@@ -15,7 +15,7 @@ async function SearchPage({ searchParams }: Props) {
   const data = await getSearchedItems(query, type);
 
   return (
-    <section className="flex flex-col pt-20">
+    <section className="flex flex-col py-20">
       <h2 className="text-2xl font-semibold">
         Search results:{' '}
         <span className="text-xl font-medium text-slate-700 dark:text-slate-400">

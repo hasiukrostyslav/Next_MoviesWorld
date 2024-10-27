@@ -24,8 +24,8 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
         <Image
           className="mb-3 rounded-md transition-all duration-500 hover:opacity-70"
           src={
-            actor.imgPath
-              ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${actor.imgPath}`
+            actor.posterImg
+              ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${actor.posterImg}`
               : `/imgActorAlt.jpg`
           }
           width={width}

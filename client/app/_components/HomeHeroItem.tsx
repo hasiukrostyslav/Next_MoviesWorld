@@ -18,7 +18,7 @@ function HomeHeroItem({ children, movie, currentMovie, index }: HeroItemProps) {
       }`}
     >
       <BackdropPoster
-        src={movie.backdropPath}
+        src={movie.backdropImg}
         title={movie.title}
       />
 
@@ -47,4 +47,3 @@ function HomeHeroItem({ children, movie, currentMovie, index }: HeroItemProps) {
 }
 
 export default HomeHeroItem;
-

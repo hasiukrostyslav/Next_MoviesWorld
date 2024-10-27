@@ -7,7 +7,7 @@ interface ActorHeroProps {
 }
 
 function ActorHero({ actor }: ActorHeroProps) {
-  const { name, birthday, deathday, biography, age, birthplace, imgPath } =
+  const { name, birthday, deathday, biography, age, birthplace, posterImg } =
     actor;
 
   const info = [
@@ -22,7 +22,7 @@ function ActorHero({ actor }: ActorHeroProps) {
       <div className="flex h-full gap-10">
         <div className="basis-1/4 h-96 relative">
           <Poster
-            src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${imgPath}`}
+            src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${posterImg}`}
             title={name}
           />
         </div>

@@ -15,7 +15,7 @@ function EpisodeItem({ episode, backupPoster }: EpisodeItemProps) {
           <Image
             className="h-full w-96 rounded-md"
             src={`${process.env.NEXT_PUBLIC_IMG_URL_LARGE}${
-              episode.posterPath || backupPoster
+              episode.posterImg || backupPoster
             }`}
             alt="Episode Image"
             width={240}

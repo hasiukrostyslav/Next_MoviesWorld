@@ -31,8 +31,8 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
             <Image
               className="mb-3 rounded-md transition-all duration-500 hover:opacity-70"
               src={
-                item.posterPath
-                  ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${item.posterPath}`
+                item.posterImg
+                  ? `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${item.posterImg}`
                   : `/imgMovieAlt.jpg`
               }
               width={width}

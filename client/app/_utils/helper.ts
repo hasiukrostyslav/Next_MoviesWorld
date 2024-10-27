@@ -89,7 +89,7 @@ export const formatDate = function (str: string | null | undefined) {
 export const isTypeOfHero = (
   data: GeneralListTypes
 ): data is HeroBaseData[] => {
-  if (data.every((el) => Object.hasOwn(el, 'backdropPath'))) return true;
+  if (data.every((el) => Object.hasOwn(el, 'backdropImg'))) return true;
   else return false;
 };
 

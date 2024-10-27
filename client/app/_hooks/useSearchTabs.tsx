@@ -6,21 +6,27 @@ import { useEffect, useState } from 'react';
 export function useSearchTabs() {
   const searchParams = useSearchParams();
   const [leftPosition, setLeftPosition] = useState<string>();
-  const type = searchParams.get('type');
 
-  const params = searchParams
+  const params = {
+    query: searchParams.get('query') || '',
+    type: searchParams.get('type') || '',
+    searchId: searchParams.get('searchId') || '',
+    remain: searchParams.get('remain') || '',
+  };
+
+  const queryString = `query=${params.query}`;
+  const searchString = searchParams
     .toString()
     .split('&')
-    .map((param) => (param.includes('page') ? 'page=1' : param))
-    .filter((param) => !param.includes('type'))
+    .filter((param) => param.includes('query') || param.includes('type'))
     .join('&');
 
   useEffect(() => {
-    if (!type) setLeftPosition('before:left-0');
-    if (type === 'movies') setLeftPosition('before:left-1/4');
-    if (type === 'shows') setLeftPosition('before:left-2/4');
-    if (type === 'actors') setLeftPosition('before:left-3/4');
-  }, [type]);
+    if (!params.type) setLeftPosition('before:left-0');
+    if (params.type === 'movies') setLeftPosition('before:left-1/4');
+    if (params.type === 'shows') setLeftPosition('before:left-2/4');
+    if (params.type === 'actors') setLeftPosition('before:left-3/4');
+  }, [params.type]);
 
-  return { params, type, leftPosition };
+  return { queryString, searchString, params, leftPosition };
 }

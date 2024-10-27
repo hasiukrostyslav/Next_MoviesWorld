@@ -24,7 +24,7 @@ const baseURL = process.env.SERVER_URL;
 // Home
 export async function getHomePageData(): Promise<HomePageData> {
   try {
-    const res = await fetch(baseURL);
+    const res = await fetch(baseURL, { next: { revalidate: 3600 } });
     const data = await res.json();
 
     return data.data;
@@ -39,7 +39,9 @@ export async function getTrendingMovies(
   try {
     const searchParams = page ? `?page=${page}` : '';
 
-    const res = await fetch(`${baseURL}/trending/movies${searchParams}`);
+    const res = await fetch(`${baseURL}/trending/movies${searchParams}`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data;
@@ -54,7 +56,9 @@ export async function getTrendingShows(
   try {
     const searchParams = page ? `?page=${page}` : '';
 
-    const res = await fetch(`${baseURL}/trending/tv${searchParams}`);
+    const res = await fetch(`${baseURL}/trending/tv${searchParams}`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data;
@@ -66,7 +70,9 @@ export async function getTrendingShows(
 // Movies
 export async function getMoviesPageData(): Promise<MoviesPageResponse[]> {
   try {
-    const res = await fetch(`${baseURL}/movies`);
+    const res = await fetch(`${baseURL}/movies`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data.data;
@@ -85,7 +91,8 @@ export async function getMoviesByCategory(
     const searchParams = page ? `?page=${page}` : '';
 
     const res = await fetch(
-      `${baseURL}/movies/category/${params}${searchParams}`
+      `${baseURL}/movies/category/${params}${searchParams}`,
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
 
@@ -99,7 +106,9 @@ export async function getMovieById(id: string | undefined): Promise<Movie> {
   try {
     if (!id) notFound();
 
-    const res = await fetch(`${baseURL}/view/movie/${id}`);
+    const res = await fetch(`${baseURL}/view/movie/${id}`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -112,7 +121,9 @@ export async function getMovieById(id: string | undefined): Promise<Movie> {
 // Cartoons
 export async function getCartoonsPageData(): Promise<CartoonsPageResponse[]> {
   try {
-    const res = await fetch(`${baseURL}/cartoons`);
+    const res = await fetch(`${baseURL}/cartoons`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data.data;
@@ -132,7 +143,8 @@ export async function getCartoonsByCategory(
     const searchParams = page ? `?page=${page}` : '';
 
     const res = await fetch(
-      `${baseURL}/cartoons/category/${type}/${key}/${searchParams}`
+      `${baseURL}/cartoons/category/${type}/${key}/${searchParams}`,
+      { next: { revalidate: 3600 } }
     );
     const data = await res.json();
 
@@ -145,7 +157,7 @@ export async function getCartoonsByCategory(
 // Shows
 export async function getShowsPageData(): Promise<ShowsPageResponse[]> {
   try {
-    const res = await fetch(`${baseURL}/tv`);
+    const res = await fetch(`${baseURL}/tv`, { next: { revalidate: 3600 } });
     const data = await res.json();
 
     return data.data;
@@ -163,7 +175,9 @@ export async function getShowsByCategory(
 
     const searchParams = page ? `?page=${page}` : '';
 
-    const res = await fetch(`${baseURL}/tv/category/${params}${searchParams}`);
+    const res = await fetch(`${baseURL}/tv/category/${params}${searchParams}`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data;
@@ -176,7 +190,9 @@ export async function getShowById(id: string | undefined): Promise<Show> {
   try {
     if (!id) notFound();
 
-    const res = await fetch(`${baseURL}/view/tv/${id}`);
+    const res = await fetch(`${baseURL}/view/tv/${id}`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -193,7 +209,9 @@ export async function getShowSeason(
   try {
     if (!id || !seasonId) notFound();
 
-    const res = await fetch(`${baseURL}/view/tv/${id}/season/${seasonId}`);
+    const res = await fetch(`${baseURL}/view/tv/${id}/season/${seasonId}`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -212,7 +230,8 @@ export async function getShowEpisode(
     if (!id || !seasonId || !episodeId) notFound();
 
     const res = await fetch(
-      `${baseURL}/view/tv/${id}/season/${seasonId}/episode/${episodeId}`
+      `${baseURL}/view/tv/${id}/season/${seasonId}/episode/${episodeId}`,
+      { next: { revalidate: 3600 } }
     );
 
     const data = await res.json();
@@ -226,7 +245,9 @@ export async function getShowEpisode(
 // Collections
 export async function getCollectionsPageData(): Promise<CollectionsPageResponse> {
   try {
-    const res = await fetch(`${baseURL}/collections`);
+    const res = await fetch(`${baseURL}/collections`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -239,7 +260,9 @@ export async function getCollectionsPageData(): Promise<CollectionsPageResponse>
 export async function getCollectionById(id: string): Promise<CollectionData> {
   try {
     if (!id) notFound();
-    const res = await fetch(`${baseURL}/collections/${id}`);
+    const res = await fetch(`${baseURL}/collections/${id}`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -256,7 +279,9 @@ export async function getActorsPageData(
   try {
     const searchParams = page ? `?page=${page}` : '';
 
-    const res = await fetch(`${baseURL}/actors${searchParams}`);
+    const res = await fetch(`${baseURL}/actors${searchParams}`, {
+      next: { revalidate: 3600 },
+    });
     const data = await res.json();
 
     return data;
@@ -269,7 +294,9 @@ export async function getActorById(id: string | undefined): Promise<Actor> {
   try {
     if (!id) notFound();
 
-    const res = await fetch(`${baseURL}/view/actor/${id}`);
+    const res = await fetch(`${baseURL}/view/actor/${id}`, {
+      next: { revalidate: 3600 },
+    });
 
     const data = await res.json();
 
@@ -282,17 +309,13 @@ export async function getActorById(id: string | undefined): Promise<Actor> {
 // Search
 export async function getSearchedItems(
   query: string,
-  type: string | null,
-  searchId: number | string | null,
-  remain: string | null
+  type: string | null
 ): Promise<SearchResponse> {
   try {
     if (!query) notFound();
-    const typeParam = type ? `&typ=${type}` : '';
-    const searchIdParam = searchId ? `&searchId=${searchId}` : '';
-    const remainParam = remain ? `&remain=${remain}` : '';
 
-    const searchParams = `?query=${query}${typeParam}${searchIdParam}${remainParam}`;
+    const typeParam = type ? `&type=${type}` : '';
+    const searchParams = `?query=${query}${typeParam}`;
 
     const res = await fetch(`${baseURL}/search${searchParams}`);
     const data = await res.json();

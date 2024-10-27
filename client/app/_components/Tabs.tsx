@@ -4,7 +4,11 @@ import { useSearchTabs } from '../_hooks/useSearchTabs';
 import Tab from './Tab';
 
 function Tabs() {
-  const { params, type, leftPosition } = useSearchTabs();
+  const {
+    queryString,
+    params: { type },
+    leftPosition,
+  } = useSearchTabs();
 
   return (
     <div
@@ -13,28 +17,28 @@ function Tabs() {
       <Tab
         tabType=""
         searchParamType={type || ''}
-        href={`?${params}`}
+        href={`?${queryString}`}
       >
         All
       </Tab>
       <Tab
         tabType="movies"
         searchParamType={type}
-        href={`?${params}&type=movies`}
+        href={`?${queryString}&type=movies`}
       >
         Movies
       </Tab>
       <Tab
         tabType="shows"
         searchParamType={type}
-        href={`?${params}&type=shows`}
+        href={`?${queryString}&type=shows`}
       >
         Shows
       </Tab>
       <Tab
         tabType="actors"
         searchParamType={type}
-        href={`?${params}&type=actors`}
+        href={`?${queryString}&type=actors`}
       >
         Actors
       </Tab>

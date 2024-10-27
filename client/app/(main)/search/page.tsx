@@ -1,5 +1,4 @@
 import { getSearchedItems } from '@/app/_lib/data-service';
-import Pagination from '@/app/_components/Pagination';
 import SearchedList from '@/app/_components/SearchedList';
 import Tabs from '@/app/_components/Tabs';
 
@@ -7,17 +6,14 @@ type Props = {
   searchParams: {
     query: string;
     type: string | null;
-    searchId: number | string | null;
-    remain: string | null;
   };
 };
 
 async function SearchPage({ searchParams }: Props) {
-  const { query, type, searchId, remain } = searchParams;
+  const { query, type } = searchParams;
 
-  const data = await getSearchedItems(query, type, searchId, remain);
+  const data = await getSearchedItems(query, type);
 
-  const { data: searchedData, page: currentPage, totalPages } = data.data;
   return (
     <section className="flex flex-col pt-20">
       <h2 className="text-2xl font-semibold">
@@ -27,11 +23,7 @@ async function SearchPage({ searchParams }: Props) {
         </span>
       </h2>
       <Tabs />
-      <SearchedList searchedItems={searchedData} />
-      {/* <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-      /> */}
+      <SearchedList initialData={data} />
     </section>
   );
 }

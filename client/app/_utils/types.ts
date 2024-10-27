@@ -51,46 +51,18 @@ export interface CollectionsPageResponse extends ResponseSkeleton {
   data: CollectionData[];
 }
 
+export type SearchBaseData = (MovieBaseData | ShowBaseData | ActorBaseData)[];
+
 export interface SearchResponse {
   status: string;
-  page: number;
-  totalPages: number;
-  totalResults: number;
-  resultPerPage: number;
-  results: number;
-  redundantData: (MovieBaseData | ShowBaseData | ActorBaseData)[];
-  data: (MovieBaseData | ShowBaseData | ActorBaseData)[];
-}
-
-export interface SearchMoviesResponse {
-  status: string;
-  page: number;
-  totalPages: number;
-  totalResults: number;
-  resultPerPage: number;
-  results: number;
-  redundantData: MovieBaseData[];
-  data: MovieBaseData[];
-}
-export interface SearchShowsResponse {
-  status: string;
-  page: number;
-  totalPages: number;
-  totalResults: number;
-  resultPerPage: number;
-  results: number;
-  redundantData: ShowBaseData[];
-  data: ShowBaseData[];
-}
-export interface SearchActorsResponse {
-  status: string;
-  page: number;
-  totalPages: number;
-  totalResults: number;
-  resultPerPage: number;
-  results: number;
-  redundantData: ActorBaseData[];
-  data: ActorBaseData[];
+  data: {
+    page: number;
+    totalPages: number;
+    totalResults: number;
+    results: number;
+    resultPerPage: number;
+    data: SearchBaseData;
+  };
 }
 
 // List types

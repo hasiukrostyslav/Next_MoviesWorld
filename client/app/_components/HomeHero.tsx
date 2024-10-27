@@ -21,7 +21,7 @@ function HomeHero({ movies }: { movies: HeroBaseData[] }) {
               currentMovie={currentMovie}
             >
               <Poster
-                src={`${process.env.NEXT_PUBLIC_IMG_URL_MEDIUM}${movie.posterPath}`}
+                src={`${process.env.NEXT_PUBLIC_IMG_URL_MEDIUM}${movie.posterImg}`}
                 title={movie.title}
               />
             </HomeHeroItem>
@@ -42,4 +42,3 @@ function HomeHero({ movies }: { movies: HeroBaseData[] }) {
 }
 
 export default HomeHero;
-

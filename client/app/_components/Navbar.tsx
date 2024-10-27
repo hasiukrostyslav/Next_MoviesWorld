@@ -1,10 +1,11 @@
 import Logo from './Logo';
+import NavbarBackground from './NavbarBackground';
 import NavigationLink from './NavigationLink';
 import TopBar from './TopBar';
 
 function Navbar() {
   return (
-    <nav className="relative mb-4 flex items-center justify-between">
+    <nav className="sticky top-10 z-50 mb-4 flex items-center justify-between">
       <div className="flex items-center justify-between gap-7 3xl:gap-10">
         <Logo size="base" />
         <ul className="flex items-center gap-3 3xl:gap-6">
@@ -17,6 +18,7 @@ function Navbar() {
         </ul>
       </div>
       <TopBar />
+      <NavbarBackground />
     </nav>
   );
 }

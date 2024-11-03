@@ -1,15 +1,36 @@
 'use client';
 
-import { submitSearchForm } from '../_actions/searchActions';
+import { getFastSearch, submitSearchForm } from '../_actions/searchActions';
 import { useMatchTheme } from '../_hooks/useMatchTheme';
 import Icon from './Icon';
 import { useSearchForm } from '../_hooks/useSearchForm';
 import Background from './Background';
 
+import SearchBoard from './SearchBoard';
+
 function SearchForm() {
   const match = useMatchTheme();
-  const { formRef, inputRef, resetForm, isFocus, setIsFocus, clearInput } =
-    useSearchForm();
+
+  const {
+    items,
+    setItems,
+    formRef,
+    inputRef,
+    resetForm,
+    isFocus,
+    setIsFocus,
+    clearInput,
+  } = useSearchForm();
+
+  async function onChange(query: string) {
+    if (!query || query.length < 3) {
+      setItems([]);
+      return;
+    }
+
+    const data = await getFastSearch(query);
+    setItems(data);
+  }
 
   return (
     <>
@@ -25,6 +46,7 @@ function SearchForm() {
         <input
           ref={inputRef}
           onClick={() => setIsFocus(true)}
+          onChange={(e) => onChange(e.target.value)}
           name="query"
           placeholder="Search here"
           type="text"
@@ -51,6 +73,12 @@ function SearchForm() {
         </button>
       </form>
       {isFocus && <Background onClick={() => resetForm()} />}
+      {items.length > 0 && (
+        <SearchBoard
+          items={items}
+          query={inputRef.current?.value}
+        />
+      )}
     </>
   );
 }

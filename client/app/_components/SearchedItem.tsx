@@ -18,7 +18,8 @@ function SearchedItem({ item }: Item) {
       className="flex w-96 gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600"
     >
       <Image
-        className="h-auto w-10"
+        width={40}
+        height={60}
         src={`${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${item.posterImg}`}
         alt="poster"
       />

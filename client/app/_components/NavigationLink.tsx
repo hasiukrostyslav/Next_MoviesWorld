@@ -10,7 +10,7 @@ interface NavigationLinkProps {
   className?: string;
 }
 
-const baseStyles = 'outline-round px-2 py-1 z-20';
+const baseStyles = 'outline-round px-2 py-1';
 
 function NavigationLink({ href, children, className }: NavigationLinkProps) {
   const match = useMatchTheme();

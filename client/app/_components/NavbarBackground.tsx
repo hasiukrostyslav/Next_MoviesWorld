@@ -8,7 +8,7 @@ function NavbarBackground() {
 
   if (isScroll)
     return createPortal(
-      <div className="fixed left-0 top-0 z-40 h-24 w-screen bg-slate-200  dark:bg-slate-800"></div>,
+      <div className="fixed left-0 top-0 z-20 h-24 w-screen bg-slate-200 dark:bg-slate-800"></div>,
       document.body
     );
 

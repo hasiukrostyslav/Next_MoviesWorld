@@ -1,27 +1,27 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { ActorBaseData, MovieBaseData, ShowBaseData } from '../_utils/types';
+import Image from 'next/image';
 import { formatTextLength } from '../_utils/helper';
+import type {
+  ActorBaseData,
+  MovieBaseData,
+  ShowBaseData,
+} from '../_utils/types';
 
 interface Item {
   item: MovieBaseData | ShowBaseData | ActorBaseData;
 }
+
 function SearchedItem({ item }: Item) {
   return (
     <Link
       href={`/view/${'type' in item ? item.type : 'actor'}/${item.id}`}
       className="flex w-96 gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600"
     >
-      <div className="h-auto w-10">
-        <Image
-          fill
-          src={
-            `${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${item.posterImg}` ||
-            `/imgMovieAlt.jpg`
-          }
-          alt="poster"
-        />
-      </div>
+      <Image
+        className="h-auto w-10"
+        src={`${process.env.NEXT_PUBLIC_IMG_URL_SMALL}${item.posterImg}`}
+        alt="poster"
+      />
       <div className="flex w-full flex-col items-start justify-center">
         <p>
           {'type' in item && formatTextLength(item.title, 80, 83)}{' '}
@@ -52,4 +52,5 @@ function SearchedItem({ item }: Item) {
     </Link>
   );
 }
+
 export default SearchedItem;

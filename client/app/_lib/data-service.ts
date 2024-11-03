@@ -317,7 +317,9 @@ export async function getSearchedItems(
     const typeParam = type ? `&type=${type}` : '';
     const searchParams = `?query=${query}${typeParam}`;
 
-    const res = await fetch(`${baseURL}/search${searchParams}`);
+    const res = await fetch(`${baseURL}/search${searchParams}`, {
+      cache: 'no-store',
+    });
     const data = await res.json();
 
     return data;

@@ -6,7 +6,7 @@ import type { SearchBaseData, SearchResponse } from '../_utils/types';
 import ActorCard from './ActorCard';
 import MovieCard from './MovieCard';
 import Button from './Button';
-import { getMoreSearchedItems } from '../_actions/getMoreSearchedData';
+import { getMoreSearchedItems } from '../_actions/searchActions';
 
 function SearchedList({ initialData }: { initialData: SearchResponse }) {
   const {
@@ -21,22 +21,23 @@ function SearchedList({ initialData }: { initialData: SearchResponse }) {
   const query = searchParams.get('query');
   const type = searchParams.get('type');
   const [items, setItems] = useState<SearchBaseData>(searchedData);
-  const [typeParam, setTypeParam] = useState(type);
+
+  const [params, setParams] = useState({ query, type });
   const [extraLoadSetting, setExtraLoadSetting] = useState({
     curPage: page,
     offSet: results - resultPerPage,
   });
 
   useEffect(() => {
-    if (type !== typeParam) {
+    if (type !== params.type || query !== params.query) {
+      setParams({ query, type });
       setItems(searchedData);
-      setTypeParam(type);
       setExtraLoadSetting({
         curPage: page,
         offSet: results - resultPerPage,
       });
     }
-  }, [typeParam, type, searchedData, page, resultPerPage, results]);
+  }, [params, type, searchedData, page, resultPerPage, results, query]);
 
   async function loadMoreData() {
     const extraData = await getMoreSearchedItems(query, type, extraLoadSetting);

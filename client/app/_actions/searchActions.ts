@@ -2,8 +2,18 @@
 
 import { SearchResponse } from '../_utils/types';
 import { ServerError } from '../_error/error';
+import { redirect } from 'next/navigation';
 
 const baseURL = process.env.SERVER_URL;
+
+export async function submitSearchForm(formData: FormData) {
+  const query = formData.get('query') as string;
+  formData.set('query', '');
+
+  if (!query || query.length < 3) return;
+
+  redirect(`/search?query=${query}`);
+}
 
 export async function getMoreSearchedItems(
   query: string | null,

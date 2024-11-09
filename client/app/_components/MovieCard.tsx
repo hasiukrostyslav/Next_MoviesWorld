@@ -55,14 +55,14 @@ function MovieCard({ item, frame, className, hidden }: MoviesCardProps) {
               </span>
             )}
           </div>
-          <span>{formatTextLength(item.title, 17, 20)}</span>
+          <span>{formatTextLength(item.title, 18, 19)}</span>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="text-sm font-light">{item.year}</span>
+            <button className="outline-round p-1 font-semibold">
+              <Icon name="favorite" />
+            </button>
+          </div>
         </Link>
-        <div className="mt-2 flex items-center justify-between">
-          <span className="text-sm font-light">{item.year}</span>
-          <button className="outline-round p-1 font-semibold">
-            <Icon name="favorite" />
-          </button>
-        </div>
       </div>
     </li>
   );

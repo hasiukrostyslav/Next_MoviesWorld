@@ -22,7 +22,7 @@ async function MoviesByCategoryPage({
     <section className="flex flex-col py-20">
       <FilmListLong
         movies={movies}
-        heading="Trending Movies"
+        heading="Trending Shows"
       />
       <Pagination
         currentPage={currentPage}

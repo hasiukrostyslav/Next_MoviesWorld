@@ -6,14 +6,14 @@ function AuthMenu() {
       <ButtonLink
         size="small"
         color="outline"
-        href="auth/login"
+        href="/auth/login"
       >
         Log in
       </ButtonLink>
       <ButtonLink
         size="small"
         color="primary"
-        href="auth/signup"
+        href="/auth/signup"
       >
         Sign up
       </ButtonLink>

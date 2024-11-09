@@ -35,12 +35,12 @@ function ActorCard({ actor, cast, className }: ActorCardProps) {
           alt={`${actor.name} photo`}
         />
         {formatTextLength(actor.name, 18, 16)}
+        {cast && (
+          <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            {formatTextLength(character, 22, 20)}
+          </span>
+        )}
       </Link>
-      {cast && (
-        <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-          {formatTextLength(character, 22, 20)}
-        </span>
-      )}
     </li>
   );
 }

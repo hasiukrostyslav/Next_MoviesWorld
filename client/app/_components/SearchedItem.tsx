@@ -15,7 +15,7 @@ function SearchedItem({ item }: Item) {
   return (
     <Link
       href={`/view/${'type' in item ? item.type : 'actor'}/${item.id}`}
-      className="flex w-96 gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600"
+      className="flex w-full gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600"
     >
       <Image
         width={40}

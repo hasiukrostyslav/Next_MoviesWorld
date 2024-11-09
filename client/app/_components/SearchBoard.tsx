@@ -17,7 +17,7 @@ function SearchBoard({ items, query }: SearchBoardProps) {
       className={`absolute ${leftPosition} top-14 z-30 ${
         items
           ? // !isError && !isFetching
-            'grid auto-rows-max gap-x-10 gap-y-4'
+            'grid auto-rows-fr gap-x-10 gap-y-4'
           : 'flex min-h-40 min-w-96  items-center justify-center p-2 text-lg dark:text-slate-400'
       } rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
     >

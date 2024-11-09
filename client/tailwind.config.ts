@@ -20,6 +20,9 @@ const config: Config = {
         hero: 'calc(100vh - 6.25rem)',
         img: '25rem',
       },
+      width: {
+        86: '360px',
+      },
       aspectRatio: {
         img: '4 / 3',
       },
@@ -38,4 +41,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-

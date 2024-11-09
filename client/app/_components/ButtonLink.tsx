@@ -46,6 +46,7 @@ function ButtonLink({
         match && color === 'outline' ? buttonColors.outlineWhite : ''
       } ${className}`}
       href={href}
+      scroll
     >
       {children}
     </Link>

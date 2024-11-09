@@ -7,9 +7,11 @@ import { useSearchForm } from '../_hooks/useSearchForm';
 import Background from './Background';
 
 import SearchBoard from './SearchBoard';
+import { useScroll } from '../_hooks/useScroll';
 
 function SearchForm() {
   const match = useMatchTheme();
+  const { isScroll, scrollToTop } = useScroll();
 
   const {
     items,
@@ -38,6 +40,7 @@ function SearchForm() {
         action={async (formData) => {
           await submitSearchForm(formData);
           resetForm();
+          if (isScroll) scrollToTop();
         }}
         ref={formRef}
         autoComplete="off"

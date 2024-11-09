@@ -9,13 +9,16 @@ import type {
 
 interface Item {
   item: MovieBaseData | ShowBaseData | ActorBaseData;
+  length: number;
 }
 
-function SearchedItem({ item }: Item) {
+function SearchedItem({ item, length }: Item) {
   return (
     <Link
       href={`/view/${'type' in item ? item.type : 'actor'}/${item.id}`}
-      className="flex w-full gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600"
+      className={`${
+        length > 6 ? 'w-86' : 'w-96'
+      } flex gap-2 text-sm font-medium transition-all duration-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-blue-600`}
     >
       <Image
         width={40}
@@ -25,7 +28,7 @@ function SearchedItem({ item }: Item) {
       />
       <div className="flex w-full flex-col items-start justify-center">
         <p>
-          {'type' in item && formatTextLength(item.title, 80, 83)}{' '}
+          {'type' in item && formatTextLength(item.title, 74, 76)}{' '}
           {'name' in item && item.name}{' '}
           {'type' in item && (
             <span className="text-xs font-light text-slate-500">

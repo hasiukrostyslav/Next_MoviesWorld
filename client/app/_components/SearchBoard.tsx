@@ -18,7 +18,7 @@ function SearchBoard({ items, query }: SearchBoardProps) {
         items
           ? // !isError && !isFetching
             'grid auto-rows-fr gap-x-10 gap-y-4'
-          : 'flex min-h-40 min-w-96  items-center justify-center p-2 text-lg dark:text-slate-400'
+          : 'flex min-h-40 min-w-96 items-center justify-center text-lg dark:text-slate-400'
       } rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
     >
       {items &&
@@ -26,6 +26,7 @@ function SearchBoard({ items, query }: SearchBoardProps) {
         // !isError &&
         items.slice(0, 12).map((el) => (
           <SearchedItem
+            length={items.length}
             key={el.id}
             item={el}
           />

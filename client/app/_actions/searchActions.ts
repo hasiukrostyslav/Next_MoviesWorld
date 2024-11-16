@@ -1,8 +1,8 @@
 'use server';
 
-import { SearchBaseData, SearchResponse } from '../_utils/types';
+import { redirect } from 'next/navigation';
 import { ServerError } from '../_error/error';
-import { notFound, redirect } from 'next/navigation';
+import type { SearchBaseData, SearchResponse } from '../_utils/types';
 
 const baseURL = process.env.SERVER_URL;
 
@@ -18,8 +18,6 @@ export async function getFastSearch(query: string): Promise<SearchBaseData> {
   try {
     const res = await fetch(`${baseURL}/search?query=${query}`);
     const data = await res.json();
-
-    // if (data.error.statusCode === 404) notFound();
 
     return data?.data.data;
   } catch (error) {

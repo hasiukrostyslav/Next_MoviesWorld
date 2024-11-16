@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { CinemaTypes } from '../_utils/types';
 import { formatTextLength, getImageSize } from '../_utils/helper';
+import type { CinemaTypes } from '../_utils/types';
 import Icon from './Icon';
 
 interface MoviesCardProps {

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ActorBaseData } from '../_utils/types';
 import { formatTextLength, getImageSize } from '../_utils/helper';
+import type { ActorBaseData } from '../_utils/types';
 
 interface ActorCardProps {
   actor: ActorBaseData;

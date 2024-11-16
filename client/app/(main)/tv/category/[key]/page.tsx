@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getShowsByCategory } from '@/app/_lib/data-service';
 import { convertParamToString } from '@/app/_utils/helper';
 import FilmListLong from '@/app/_components/FilmListLong';

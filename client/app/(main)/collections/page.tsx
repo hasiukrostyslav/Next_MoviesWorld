@@ -1,7 +1,7 @@
+import type { Metadata } from 'next';
 import { getCollectionsPageData } from '@/app/_lib/data-service';
 import CollectionList from '@/app/_components/CollectionList';
 import CollectionsHero from '@/app/_components/CollectionsHero';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Collections',

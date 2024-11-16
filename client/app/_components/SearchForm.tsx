@@ -2,12 +2,11 @@
 
 import { getFastSearch, submitSearchForm } from '../_actions/searchActions';
 import { useMatchTheme } from '../_hooks/useMatchTheme';
-import Icon from './Icon';
+import { useScroll } from '../_hooks/useScroll';
 import { useSearchForm } from '../_hooks/useSearchForm';
 import Background from './Background';
-
 import SearchBoard from './SearchBoard';
-import { useScroll } from '../_hooks/useScroll';
+import Icon from './Icon';
 
 function SearchForm() {
   const match = useMatchTheme();

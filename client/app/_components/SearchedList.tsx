@@ -1,12 +1,12 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { getMoreSearchedItems } from '../_actions/searchActions';
 import type { SearchBaseData, SearchResponse } from '../_utils/types';
 import ActorCard from './ActorCard';
 import MovieCard from './MovieCard';
 import Button from './Button';
-import { getMoreSearchedItems } from '../_actions/searchActions';
 
 function SearchedList({ initialData }: { initialData: SearchResponse }) {
   const {

@@ -1,5 +1,5 @@
-import type { Actor } from '../_utils/types';
 import { formatDate } from '../_utils/helper';
+import type { Actor } from '../_utils/types';
 import Poster from './Poster';
 
 interface ActorHeroProps {

@@ -1,5 +1,4 @@
-import { SearchBaseData } from '../_utils/types';
-import Button from './Button';
+import type { SearchBaseData } from '../_utils/types';
 import ButtonLink from './ButtonLink';
 import SearchedItem from './SearchedItem';
 
@@ -16,14 +15,11 @@ function SearchBoard({ items, query }: SearchBoardProps) {
     <div
       className={`absolute ${leftPosition} top-14 z-30 ${
         items
-          ? // !isError && !isFetching
-            'grid auto-rows-fr gap-x-10 gap-y-4'
+          ? 'grid auto-rows-fr gap-x-10 gap-y-4'
           : 'flex min-h-40 min-w-96 items-center justify-center text-lg dark:text-slate-400'
       } rounded-md bg-slate-200 p-6 dark:bg-slate-800`}
     >
       {items &&
-        // !isFetching &&
-        // !isError &&
         items.slice(0, 12).map((el) => (
           <SearchedItem
             length={items.length}
@@ -32,13 +28,6 @@ function SearchBoard({ items, query }: SearchBoardProps) {
           />
         ))}
 
-      {/* {isError && (
-        <div className="flex w-96 flex-col items-center gap-1">
-          <p>No data was found</p>
-          <span className="text-base text-slate-500">Please try again!</span>
-        </div>
-      )} */}
-      {/* {isFetching && <MiniSpinner />} */}
       {items.length > 12 && (
         <ButtonLink
           href={`search?query=${query}`}

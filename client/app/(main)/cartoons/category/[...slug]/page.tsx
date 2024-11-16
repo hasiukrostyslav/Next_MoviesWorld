@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getCartoonsByCategory } from '@/app/_lib/data-service';
+import { convertParamToString } from '@/app/_utils/helper';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
-import { convertParamToString } from '@/app/_utils/helper';
 
 type Props = {
   params: Promise<{ slug: string[] }>;

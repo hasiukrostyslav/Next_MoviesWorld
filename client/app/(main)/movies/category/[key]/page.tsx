@@ -1,19 +1,8 @@
-import { Metadata } from 'next';
-import {
-  getMoviesByCategory,
-  // getMoviesPageData,
-} from '@/app/_lib/data-service';
+import type { Metadata } from 'next';
+import { getMoviesByCategory } from '@/app/_lib/data-service';
 import { convertParamToString } from '@/app/_utils/helper';
 import FilmListLong from '@/app/_components/FilmListLong';
 import Pagination from '@/app/_components/Pagination';
-
-// export async function generateStaticParams() {
-//   const categories = await getMoviesPageData();
-
-//   return categories.map((category) => ({
-//     key: category.category.replaceAll(' ', '-').toLowerCase(),
-//   }));
-// }
 
 type Props = {
   params: Promise<{ key: string }>;

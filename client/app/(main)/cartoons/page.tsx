@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getCartoonsPageData } from '../../_lib/data-service';
 import FilmListShort from '@/app/_components/FilmsListShort';
 

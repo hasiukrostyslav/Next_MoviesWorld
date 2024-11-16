@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getShowSeason } from '@/app/_lib/data-service';
 import CastList from '@/app/_components/CastList';
 import EpisodeListShort from '@/app/_components/EpisodeListShort';

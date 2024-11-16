@@ -1,5 +1,5 @@
-import type { Movie, Show, ShowEpisode, ShowSeason } from '../_utils/types';
 import { createMoviesInfoList } from '../_utils/helper';
+import type { Movie, Show, ShowEpisode, ShowSeason } from '../_utils/types';
 import InfoItem from './InfoItem';
 
 function InfoSidebar({
@@ -22,4 +22,3 @@ function InfoSidebar({
 }
 
 export default InfoSidebar;
-

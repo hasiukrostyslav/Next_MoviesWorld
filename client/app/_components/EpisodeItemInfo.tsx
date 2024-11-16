@@ -1,8 +1,8 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import type { EpisodeData } from '../_utils/types';
 import { formatDate } from '../_utils/helper';
+import type { EpisodeData } from '../_utils/types';
 import NavigationLink from './NavigationLink';
 
 function EpisodeItemInfo({ episode }: { episode: EpisodeData }) {

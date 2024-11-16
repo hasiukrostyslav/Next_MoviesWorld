@@ -45,4 +45,3 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
 }
 
 export default Pagination;
-

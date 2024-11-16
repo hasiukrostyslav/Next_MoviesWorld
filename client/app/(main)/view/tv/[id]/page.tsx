@@ -1,9 +1,9 @@
+import type { Metadata } from 'next';
 import { getShowById } from '@/app/_lib/data-service';
 import CastList from '@/app/_components/CastList';
 import FilmListLong from '@/app/_components/FilmListLong';
 import InfoSidebar from '@/app/_components/InfoSidebar';
 import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
-import { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ id: string }>;

@@ -1,5 +1,5 @@
-import type { HeroBaseData } from '../_utils/types';
 import { formatTextLength } from '../_utils/helper';
+import type { HeroBaseData } from '../_utils/types';
 import BackdropPoster from './BackdropPoster';
 import ButtonLink from './ButtonLink';
 

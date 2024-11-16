@@ -4,11 +4,11 @@ import CreditsList from '@/app/_components/CreditsList';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const id = (await params).id;
   const actor = await getActorById(id);
   const title = 'Actor: ' + actor.name;
 
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function ActorPage({ params }: Props) {
-  const { id } = params;
+  const id = (await params).id;
 
   const actor = await getActorById(id);
 

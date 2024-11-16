@@ -16,20 +16,20 @@ import Pagination from '@/app/_components/Pagination';
 // }
 
 type Props = {
-  params: { key: string };
-  searchParams: { page: string | undefined };
+  params: Promise<{ key: string }>;
+  searchParams: Promise<{ page: string | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { key } = params;
+  const key = (await params).key;
   const title = convertParamToString(key) + ' Movies';
 
   return { title };
 }
 
 async function MoviesByCategoryPage({ params, searchParams }: Props) {
-  const { key } = params;
-  const { page } = searchParams;
+  const key = (await params).key;
+  const page = (await searchParams).page;
 
   const data = await getMoviesByCategory(key, page);
 

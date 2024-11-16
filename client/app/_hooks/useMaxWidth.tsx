@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 
 export function useMaxWidth(
-  divRef: React.RefObject<HTMLDivElement>,
-  headingRef: React.RefObject<HTMLHeadingElement>
+  divRef: React.RefObject<HTMLDivElement | null>,
+  headingRef: React.RefObject<HTMLHeadingElement | null>
 ) {
   const [divWidth, setDivWidth] = useState<null | string>(null);
   const [headingWidth, setHeadingWidth] = useState<null | string>(null);

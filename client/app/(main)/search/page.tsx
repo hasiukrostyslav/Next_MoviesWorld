@@ -3,14 +3,14 @@ import SearchedList from '@/app/_components/SearchedList';
 import Tabs from '@/app/_components/Tabs';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     query: string;
     type: string | null;
-  };
+  }>;
 };
 
 async function SearchPage({ searchParams }: Props) {
-  const { query, type } = searchParams;
+  const { query, type } = await searchParams;
 
   const data = await getSearchedItems(query, type);
 

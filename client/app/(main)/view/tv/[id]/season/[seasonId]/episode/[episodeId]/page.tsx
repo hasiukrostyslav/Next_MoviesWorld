@@ -6,11 +6,11 @@ import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { id: string; seasonId: string; episodeId: string };
+  params: Promise<{ id: string; seasonId: string; episodeId: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id, seasonId, episodeId } = params;
+  const { id, seasonId, episodeId } = await params;
   const episode = await getShowEpisode(id, seasonId, episodeId);
   const title = `Show: ${episode.showTitle} - Season ${episode.seasonNumber} - Episode ${episode.episodeNumber}`;
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function ShowEpisodePage({ params }: Props) {
-  const { id, seasonId, episodeId } = params;
+  const { id, seasonId, episodeId } = await params;
   const episode = await getShowEpisode(id, seasonId, episodeId);
 
   return (

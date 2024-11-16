@@ -7,11 +7,11 @@ import InfoSidebar from '@/app/_components/InfoSidebar';
 import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
 
 type Props = {
-  params: { id: string; seasonId: string };
+  params: Promise<{ id: string; seasonId: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id, seasonId } = params;
+  const { id, seasonId } = await params;
   const season = await getShowSeason(id, seasonId);
   const title = `Show: ${season.title} - ${season.seasonTitle}`;
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function ShowSeasonPage({ params }: Props) {
-  const { id, seasonId } = params;
+  const { id, seasonId } = await params;
 
   const season = await getShowSeason(id, seasonId);
 

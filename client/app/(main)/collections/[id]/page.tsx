@@ -6,16 +6,16 @@ import FilmListLong from '@/app/_components/FilmListLong';
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { id } = params;
+  const id = (await params).id;
   const title = convertParamToString(id) + ' Collection';
 
   return { title };
 }
 
-async function CollectionPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+async function CollectionPage({ params }: { params: Promise<{ id: string }> }) {
+  const id = (await params).id;
 
   const collection = await getCollectionById(id);
 

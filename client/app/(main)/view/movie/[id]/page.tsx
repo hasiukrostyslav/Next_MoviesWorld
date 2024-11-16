@@ -6,11 +6,11 @@ import InfoSidebar from '@/app/_components/InfoSidebar';
 import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const id = (await params).id;
   const movie = await getMovieById(id);
   const title = 'Movie: ' + movie.title;
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function MoviePage({ params }: Props) {
-  const { id } = params;
+  const id = (await params).id;
   const movie = await getMovieById(id);
 
   return (

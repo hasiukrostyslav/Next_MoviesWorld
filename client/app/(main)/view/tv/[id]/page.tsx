@@ -6,11 +6,11 @@ import MovieHeroContainer from '@/app/_components/MovieHeroContainer';
 import { Metadata } from 'next';
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const id = (await params).id;
   const show = await getShowById(id);
   const title = 'Show: ' + show.title;
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function ShowPage({ params }: Props) {
-  const { id } = params;
+  const id = (await params).id;
   const show = await getShowById(id);
 
   return (

@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 async function ActorsPage({
   searchParams,
 }: {
-  searchParams: { page: string | undefined };
+  searchParams: Promise<{ page: string | undefined }>;
 }) {
-  const { page } = searchParams;
+  const page = (await searchParams).page;
 
   const data = await getActorsPageData(page);
 

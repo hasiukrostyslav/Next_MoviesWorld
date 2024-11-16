@@ -5,20 +5,20 @@ import Pagination from '@/app/_components/Pagination';
 import { convertParamToString } from '@/app/_utils/helper';
 
 type Props = {
-  params: { slug: string[] };
-  searchParams: { page: string | undefined };
+  params: Promise<{ slug: string[] }>;
+  searchParams: Promise<{ page: string | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const key = params.slug[1];
+  const key = (await params).slug[1];
   const title = convertParamToString(key) + ' Cartoons';
 
   return { title };
 }
 
 async function CartoonsByCategoryPage({ params, searchParams }: Props) {
-  const [type, key] = params.slug;
-  const { page } = searchParams;
+  const [type, key] = (await params).slug;
+  const page = (await searchParams).page;
 
   const data = await getCartoonsByCategory(type, key, page);
 

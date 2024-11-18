@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { getActorById } from '@/app/_lib/data-service';
+
 import ActorHero from '@/app/_components/ActorHero';
 import CreditsList from '@/app/_components/CreditsList';
+import { getActorById } from '@/app/_lib/actors-utils';
 
 type Props = {
   params: Promise<{ id: string }>;

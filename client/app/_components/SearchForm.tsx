@@ -30,6 +30,7 @@ function SearchForm() {
     }
 
     const data = await getFastSearch(query);
+    console.log(data);
     setItems(data);
   }
 

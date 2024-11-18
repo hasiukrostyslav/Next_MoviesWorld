@@ -19,7 +19,7 @@ function Error({ code, message, pageType, children, className }: ErrorProps) {
   return (
     <section
       className={`flex flex-col items-center justify-center gap-12 ${
-        pageType === 'inner' ? 'h-hero' : ''
+        pageType === 'inner' ? 'h-hero' : 'h-80'
       } ${className}`}
     >
       <Image

@@ -1,44 +1,38 @@
-import { getHomePageData } from '@/app/_lib/data-service';
-import { isTypeOfCinema, isTypeOfHero } from '../_utils/helper';
-import ActorsList from '@/app/_components/ActorsList';
-import FilmListShort from '@/app/_components/FilmsListShort';
-import HomeHero from '@/app/_components/HomeHero';
+import { Suspense } from 'react';
+import Spinner from '../_components/Spinner';
+import Skeleton from '../_components/Skeleton';
+import HomeHeroList from '../_components/HomeHeroList';
+import HomeMoviesList from '../_components/HomeMoviesList';
+import HomeActorsList from '../_components/HomeActorsList';
 
-async function HomePage() {
-  const categories = await getHomePageData();
-
+function HomePage() {
   return (
     <section>
-      {categories?.map((category) => {
-        if (isTypeOfHero(category.data)) {
-          return (
-            <HomeHero
-              key={category.category}
-              movies={category.data}
-            />
-          );
-        } else if (isTypeOfCinema(category.data)) {
-          return (
-            <FilmListShort
-              key={category.category}
-              movies={category.data}
-              heading={category.category}
-              path={`/trending/${
-                category.category.includes('Movies') ? 'movies' : 'tv'
-              }`}
-            />
-          );
-        } else {
-          return (
-            <ActorsList
-              key={category.category}
-              actors={category.data}
-              heading={category.category}
-              className="pb-20"
-            />
-          );
+      <Suspense fallback={<Spinner fixed />}>
+        <HomeHeroList />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <Skeleton
+            type="movie"
+            rows={2}
+          />
         }
-      })}
+      >
+        <HomeMoviesList />
+      </Suspense>
+
+      <Suspense
+        fallback={
+          <Skeleton
+            type="actor"
+            rows={2}
+          />
+        }
+      >
+        <HomeActorsList />
+      </Suspense>
     </section>
   );
 }

@@ -25,8 +25,6 @@ export async function getHomePageData(): Promise<HomePageData> {
     const res = await fetch(baseURL);
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data.data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -41,8 +39,6 @@ export async function getTrendingMovies(
 
     const res = await fetch(`${baseURL}/trending/movies${searchParams}`);
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data;
   } catch (error) {
@@ -59,8 +55,6 @@ export async function getTrendingShows(
     const res = await fetch(`${baseURL}/trending/tv${searchParams}`);
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -72,8 +66,6 @@ export async function getMoviesPageData(): Promise<MoviesPageResponse[]> {
   try {
     const res = await fetch(`${baseURL}/movies`);
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -95,8 +87,6 @@ export async function getMoviesByCategory(
     );
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -111,8 +101,6 @@ export async function getMovieById(id: string | undefined): Promise<Movie> {
 
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data.data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -124,8 +112,6 @@ export async function getCartoonsPageData(): Promise<CartoonsPageResponse[]> {
   try {
     const res = await fetch(`${baseURL}/cartoons`);
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -148,8 +134,6 @@ export async function getCartoonsByCategory(
     );
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -161,8 +145,6 @@ export async function getShowsPageData(): Promise<ShowsPageResponse[]> {
   try {
     const res = await fetch(`${baseURL}/tv`);
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -182,8 +164,6 @@ export async function getShowsByCategory(
     const res = await fetch(`${baseURL}/tv/category/${params}${searchParams}`);
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -197,8 +177,6 @@ export async function getShowById(id: string | undefined): Promise<Show> {
     const res = await fetch(`${baseURL}/view/tv/${id}`);
 
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -216,8 +194,6 @@ export async function getShowSeason(
     const res = await fetch(`${baseURL}/view/tv/${id}/season/${seasonId}`);
 
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -239,8 +215,6 @@ export async function getShowEpisode(
 
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data.data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -254,8 +228,6 @@ export async function getCollectionsPageData(): Promise<CollectionsPageResponse>
 
     const data = await res.json();
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data;
   } catch (error) {
     throw new ServerError('Something went wrong. Please try again!');
@@ -268,8 +240,6 @@ export async function getCollectionById(id: string): Promise<CollectionData> {
     const res = await fetch(`${baseURL}/collections/${id}`);
 
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data.data;
   } catch (error) {
@@ -290,8 +260,6 @@ export async function getSearchedItems(
 
     const res = await fetch(`${baseURL}/search${searchParams}`);
     const data = await res.json();
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return data;
   } catch (error) {

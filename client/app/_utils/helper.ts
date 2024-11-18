@@ -100,6 +100,13 @@ export const isTypeOfCinema = (
   else return false;
 };
 
+export const isTypeOfActor = (
+  data: GeneralListTypes
+): data is CinemaListTypes => {
+  if (data.every((el) => Object.hasOwn(el, 'name'))) return true;
+  else return false;
+};
+
 // Images
 
 export const getImageSize = (size: 'small' | 'medium') => {
